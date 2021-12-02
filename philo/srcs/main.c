@@ -33,5 +33,6 @@ int	main(int argc, char **argv)
 
 	if (!parse_arg(&p, argc, argv))
 		return (return_error("Invalid arguments.\n"));
+	start_sims(p);
 	return (EXIT_SUCCESS);
 }

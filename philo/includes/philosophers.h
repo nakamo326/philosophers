@@ -4,6 +4,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
+# include <sys/time.h>
+# include <pthread.h>
+
 # include <stdbool.h>
 # include <limits.h>
 
@@ -23,6 +27,7 @@ typedef struct s_philo
 
 int			return_error(char *msg);
 bool		parse_arg(t_philo *p, int argc, char **argv);
+void		start_sims(t_philo p);
 
 size_t		ft_strlen(const char *s);
 void		ft_putstr_fd(char *s, int fd);

@@ -21,7 +21,7 @@ bool	parse_arg(t_info *info, int argc, char **argv)
 		tmp = ft_atoll(argv[i]);
 		if (tmp <= 0 || tmp > INT_MAX)
 			return (false);
-		info->params[i] = tmp;
+		info->params[i - 1] = tmp;
 		i++;
 	}
 	return (true);
@@ -31,15 +31,15 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 
-	init_info(info);
+	init_info(&info);
 	if (!parse_arg(&info, argc, argv))
 		return (print_error("Invalid arguments.\n"));
-	if (!make_info(info))
+	if (!make_info(&info))
 	{
 		print_error("failed to init infos.\n");
 		return (free_info(info, EXIT_FAILURE));
 	}
-	init_philos(info);
+	init_philos(&info);
 	start_sims(info);
 	return (free_info(info, EXIT_SUCCESS));
 }

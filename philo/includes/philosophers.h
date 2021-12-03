@@ -28,7 +28,7 @@ typedef enum e_log_i
 	SLEEPING,
 	THINKING,
 	DIED,
-} t_log_i;
+}	t_log_i;
 
 typedef struct s_log {
 	pthread_mutex_t	*print;
@@ -39,9 +39,9 @@ typedef struct s_log {
 typedef struct s_philo
 {
 	int				*params;
-	pthread_mutex_t	*left; // lefthand side fork
-	pthread_mutex_t	*right; // righthand side fork
-	pthread_mutex_t	*print; // permission to output log
+	pthread_mutex_t	*left;
+	pthread_mutex_t	*right;
+	pthread_mutex_t	*print;
 	long			time_last_eating;
 }	t_philo;
 
@@ -57,10 +57,13 @@ int			print_error(char *msg);
 bool		parse_arg(t_info *info, int argc, char **argv);
 int			start_sims(t_info info);
 
-void		init_info(t_info info);
-bool		make_info(t_info info);
-bool		init_philos(t_info info);
+void		init_info(t_info *info);
+bool		make_info(t_info *info);
+bool		init_philos(t_info *info);
 int			free_info(t_info info, int ret);
+
+long		get_time(void);
+void		sleep_well(int ms);
 
 // logger
 void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);

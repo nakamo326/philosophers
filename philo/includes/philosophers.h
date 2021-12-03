@@ -14,17 +14,26 @@
 
 typedef enum e_arg_index
 {
-	num_of_philos,
-	time_to_die,
-	time_to_eat,
-	time_to_sleep,
-	limit_times_to_die,
+	NUM_OF_PHILOS,
+	TIME_TO_DIE,
+	TIME_TO_EAT,
+	TIME_TO_SLEEP,
+	LIMIT_TIMES_TO_DIE,
 }	t_arg_index;
+
+typedef enum e_log_i
+{
+	TAKEN_FORK,
+	EATING,
+	SLEEPING,
+	THINKING,
+	DIED,
+} t_log_i;
 
 typedef struct s_log {
 	pthread_mutex_t	*print;
 	int				p_num;
-	int				log_num;
+	t_log_i			log_i;
 }	t_log;
 
 typedef struct s_philo
@@ -46,7 +55,7 @@ bool		parse_arg(t_info *info, int argc, char **argv);
 void		start_sims(t_info info);
 
 // logger
-void		output_log(pthread_mutex_t *print, int p_num, int log_num);
+void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
 void		*output_thread(void *log);
 
 // libft

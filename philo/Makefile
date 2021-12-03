@@ -4,9 +4,12 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes
 LIBS = -lpthread
 
+# SRCFILE = $(shell find srcs -type f)
 SRCFILE =	srcs/main.c \
 					srcs/libft.c \
-					srcs/sims.c
+					srcs/sims.c \
+					srcs/output.c \
+					srcs/sleep_well.c
 
 
 SRCDIRS = $(dir $(SRCFILE))

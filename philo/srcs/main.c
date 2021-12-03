@@ -1,11 +1,5 @@
 #include "philosophers.h"
 
-int	return_error(char *msg)
-{
-	ft_putstr_fd(msg, STDERR_FILENO);
-	return (EXIT_FAILURE);
-}
-
 bool	parse_arg(t_philo *p, int argc, char **argv)
 {
 	int			i;
@@ -31,8 +25,10 @@ int	main(int argc, char **argv)
 {
 	t_philo	p;
 
-	if (!parse_arg(&p, argc, argv))
-		return (return_error("Invalid arguments.\n"));
+	if (!parse_arg(&p, argc, argv)) {
+		printf("Invalid arguments.\n");
+		return (EXIT_FAILURE);
+	}
 	start_sims(p);
 	return (EXIT_SUCCESS);
 }

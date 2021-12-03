@@ -1,5 +1,7 @@
 #include "philosophers.h"
 
+// for error management, its should not be thread?
+
 // need to check manage all output
 void	output_log(pthread_mutex_t *print, int p_num, t_log_i log_i)
 {

@@ -1,5 +1,11 @@
 #include "philosophers.h"
 
+int	print_error(char *msg)
+{
+	printf("%s\n", msg);
+	return (EXIT_FAILURE);
+}
+
 bool	parse_arg(t_info *info, int argc, char **argv)
 {
 	int			i;
@@ -26,10 +32,7 @@ int	main(int argc, char **argv)
 	t_info	info;
 
 	if (!parse_arg(&info, argc, argv))
-	{
-		printf("Invalid arguments.\n");
-		return (EXIT_FAILURE);
-	}
+		return (print_error("Invalid arguments.\n"));
 	start_sims(info);
 	return (EXIT_SUCCESS);
 }

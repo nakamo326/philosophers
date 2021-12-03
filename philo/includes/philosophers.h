@@ -38,6 +38,7 @@ typedef struct s_log {
 
 typedef struct s_philo
 {
+	int				*params;
 	pthread_mutex_t	*left; // lefthand side fork
 	pthread_mutex_t	*right; // righthand side fork
 	pthread_mutex_t	*print; // permission to output log
@@ -46,13 +47,15 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	int		params[5];
-	t_philo	*p_arr;
+	int				params[5];
+	t_philo			*p_arr;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	*print;
 }	t_info;
 
-int			return_error(char *msg);
+int			print_error(char *msg);
 bool		parse_arg(t_info *info, int argc, char **argv);
-void		start_sims(t_info info);
+int			start_sims(t_info info);
 
 // logger
 void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);

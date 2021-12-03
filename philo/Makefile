@@ -2,10 +2,11 @@ NAME = philo
 
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes
+LIBS = -lpthread
 
 SRCFILE =	srcs/main.c \
 					srcs/libft.c \
-					srcs/parse_arg.c
+					srcs/sims.c
 
 
 SRCDIRS = $(dir $(SRCFILE))
@@ -18,11 +19,11 @@ all: $(NAME)
 -include $(DEPS)
 
 $(NAME): $(OBJS)
-	gcc -g $(CFLAGS) $(OBJS) $(INCLUDES) -o $@
+	gcc -g $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $@
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)/$(*D)
-	gcc -g -MMD -MP $(CFLAGS) $(INCLUDES) -c $< -o $@
+	gcc -g -MMD -MP $(CFLAGS) $(INCLUDES) -c $< $(LIBS) -o $@
 
 clean:
 	$(RM) $(OBJS) $(DEPS)

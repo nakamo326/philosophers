@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-bool	parse_arg(t_philo *p, int argc, char **argv)
+bool	parse_arg(t_info *info, int argc, char **argv)
 {
 	int			i;
 	long long	tmp;
@@ -15,7 +15,7 @@ bool	parse_arg(t_philo *p, int argc, char **argv)
 		tmp = ft_atoll(argv[i]);
 		if (tmp <= 0 || tmp > INT_MAX)
 			return (false);
-		p->params[i] = tmp;
+		info->params[i] = tmp;
 		i++;
 	}
 	return (true);
@@ -23,12 +23,12 @@ bool	parse_arg(t_philo *p, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_philo	p;
+	t_info	info;
 
-	if (!parse_arg(&p, argc, argv)) {
+	if (!parse_arg(&info, argc, argv)) {
 		printf("Invalid arguments.\n");
 		return (EXIT_FAILURE);
 	}
-	start_sims(p);
+	start_sims(info);
 	return (EXIT_SUCCESS);
 }

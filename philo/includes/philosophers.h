@@ -21,18 +21,23 @@ typedef enum e_arg_index
 	limit_times_to_die,
 }	t_arg_index;
 
-typedef struct s_philo
+typedef struct s_info
 {
 	int	params[5];
+	t_philo *p_arr;
+
+}	t_info;
+typedef struct s_philo
+{
 	pthread_mutex_t	*left; // lefthand side fork
 	pthread_mutex_t	*right; // righthand side fork
 	pthread_mutex_t	*print; // permission to output log
-
+	long			time_last_eating;
 }	t_philo;
 
 int			return_error(char *msg);
-bool		parse_arg(t_philo *p, int argc, char **argv);
-void		start_sims(t_philo p);
+bool		parse_arg(t_info *info, int argc, char **argv);
+void		start_sims(t_info info);
 
 size_t		ft_strlen(const char *s);
 bool		ft_isdigits(char *s);

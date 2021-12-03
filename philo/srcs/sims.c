@@ -7,7 +7,6 @@ bool	init_info(t_info info) {
 	info.forks = malloc(sizeof(pthread_mutex_t) * info.params[NUM_OF_PHILOS]);
 	if (info.forks == NULL)
 		return (false);
-	// move init mutex to out of func
 	i = 0;
 	while (i < info.params[NUM_OF_PHILOS])
 	{
@@ -18,6 +17,9 @@ bool	init_info(t_info info) {
 	}
 	info.print = malloc(sizeof(pthread_mutex_t));
 	if (info.print == NULL)
+		return (false);
+	ret = pthread_mutex_init(&info.print, NULL);
+	if (ret != 0)
 		return (false);
 	info.p_arr = malloc(sizeof(t_philo) * info.params[NUM_OF_PHILOS]);
 	if (info.p_arr == NULL)

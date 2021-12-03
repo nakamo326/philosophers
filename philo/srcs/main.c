@@ -25,7 +25,8 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 
-	if (!parse_arg(&info, argc, argv)) {
+	if (!parse_arg(&info, argc, argv))
+	{
 		printf("Invalid arguments.\n");
 		return (EXIT_FAILURE);
 	}

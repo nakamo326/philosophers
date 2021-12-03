@@ -21,12 +21,6 @@ typedef enum e_arg_index
 	limit_times_to_die,
 }	t_arg_index;
 
-typedef struct s_info
-{
-	int	params[5];
-	t_philo *p_arr;
-
-}	t_info;
 typedef struct s_philo
 {
 	pthread_mutex_t	*left; // lefthand side fork
@@ -34,6 +28,13 @@ typedef struct s_philo
 	pthread_mutex_t	*print; // permission to output log
 	long			time_last_eating;
 }	t_philo;
+
+typedef struct s_info
+{
+	int	params[5];
+	t_philo *p_arr;
+
+}	t_info;
 
 int			return_error(char *msg);
 bool		parse_arg(t_info *info, int argc, char **argv);

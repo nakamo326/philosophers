@@ -18,8 +18,8 @@ void *output_log(void* log){
 	return NULL;
 }
 
-void start_sims(t_philo p) {
-	(void)p;
+void start_sims(t_info info) {
+	(void)info;
 	pthread_t test;
 	t_log testlog;
 	testlog.p_num = 1;

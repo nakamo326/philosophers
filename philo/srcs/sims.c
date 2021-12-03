@@ -1,10 +1,21 @@
 #include "philosophers.h"
 
 bool	init_info(t_info info) {
-	// need to init mutex
+	int i;
+	int ret;
+
 	info.forks = malloc(sizeof(pthread_mutex_t) * info.params[NUM_OF_PHILOS]);
 	if (info.forks == NULL)
 		return (false);
+	// move init mutex to out of func
+	i = 0;
+	while (i < info.params[NUM_OF_PHILOS])
+	{
+		ret = pthread_mutex_init(&info.forks[i], NULL);
+		if (ret != 0)
+			return (false);
+		i++;
+	}
 	info.print = malloc(sizeof(pthread_mutex_t));
 	if (info.print == NULL)
 		return (false);
@@ -31,12 +42,12 @@ bool	init_philos(t_info info) {
 		info.p_arr[i].time_last_eating = tv.tv_sec;
 		i++;
 	}
+	return (true);
 }
 
 int	start_sims(t_info info)
 {
 	if (!init_info(info))
 		return (print_error("failed to init infos.\n"));
-	if (!init_philos(info))
-		return (print_error("failed to init philos.\n"));
+	init_philos(info);
 }

@@ -31,8 +31,15 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 
+	init_info(info);
 	if (!parse_arg(&info, argc, argv))
 		return (print_error("Invalid arguments.\n"));
+	if (!make_info(info))
+	{
+		print_error("failed to init infos.\n");
+		return (free_info(info, EXIT_FAILURE));
+	}
+	init_philos(info);
 	start_sims(info);
-	return (EXIT_SUCCESS);
+	return (free_info(info, EXIT_SUCCESS));
 }

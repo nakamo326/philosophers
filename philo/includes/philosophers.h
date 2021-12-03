@@ -57,6 +57,11 @@ int			print_error(char *msg);
 bool		parse_arg(t_info *info, int argc, char **argv);
 int			start_sims(t_info info);
 
+void		init_info(t_info info);
+bool		make_info(t_info info);
+bool		init_philos(t_info info);
+int			free_info(t_info info, int ret);
+
 // logger
 void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
 void		*output_thread(void *log);

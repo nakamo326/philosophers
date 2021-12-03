@@ -1,6 +1,14 @@
 #include "philosophers.h"
 
-bool	init_info(t_info info) {
+void	init_info(t_info info)
+{
+	info.p_arr = NULL;
+	info.forks = NULL;
+	info.print = NULL;
+}
+
+bool	make_info(t_info info)
+{
 	int i;
 	int ret;
 
@@ -27,7 +35,8 @@ bool	init_info(t_info info) {
 	return (true);
 }
 
-bool	init_philos(t_info info) {
+bool	init_philos(t_info info)
+{
 	int i;
 	int num;
 	struct timeval	tv;
@@ -47,9 +56,15 @@ bool	init_philos(t_info info) {
 	return (true);
 }
 
+int	free_info(t_info info, int ret)
+{
+	free(info.p_arr);
+	free(info.forks);
+	free(info.print);
+	return (ret);
+}
+
 int	start_sims(t_info info)
 {
-	if (!init_info(info))
-		return (print_error("failed to init infos.\n"));
-	init_philos(info);
+
 }

@@ -39,7 +39,8 @@ int	main(int argc, char **argv)
 		print_error("failed to init infos.");
 		return (free_info(info, EXIT_FAILURE));
 	}
-	init_philos(&info);
+	init_philos(info);
 	start_sims(info);
+	
 	return (free_info(info, EXIT_SUCCESS));
 }

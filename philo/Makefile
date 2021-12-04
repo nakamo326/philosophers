@@ -23,11 +23,11 @@ all: $(NAME)
 -include $(DEPS)
 
 $(NAME): $(OBJS)
-	gcc -g $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $@
+	gcc -fsanitize=thread $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $@
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)/$(*D)
-	gcc -g -MMD -MP $(CFLAGS) $(INCLUDES) -c $< $(LIBS) -o $@
+	gcc -fsanitize=thread -MMD -MP $(CFLAGS) $(INCLUDES) -c $< $(LIBS) -o $@
 
 clean:
 	$(RM) $(OBJS) $(DEPS)

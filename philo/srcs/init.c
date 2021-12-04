@@ -44,21 +44,21 @@ bool	make_info(t_info *info)
 	return (true);
 }
 
-bool	init_philos(t_info *info)
+bool	init_philos(t_info info)
 {
 	int				i;
 	int				num;
 
 	i = 0;
-	num = info->params[NUM_OF_PHILOS];
+	num = info.params[NUM_OF_PHILOS];
 	while (i < num)
 	{
-		info->p_arr[i].index = i + 1;
-		info->p_arr[i].params = info->params;
-		info->p_arr[i].left = &info->forks[i];
-		info->p_arr[i].right = &info->forks[(i + num - 1) % num];
-		info->p_arr[i].print = info->print;
-		info->p_arr[i].time_last_eating = get_time();
+		info.p_arr[i].index = i + 1;
+		info.p_arr[i].params = info.params;
+		info.p_arr[i].left = &info.forks[i];
+		info.p_arr[i].right = &info.forks[(i + num - 1) % num];
+		info.p_arr[i].print = info.print;
+		info.p_arr[i].time_last_eating = get_time();
 		i++;
 	}
 	return (true);

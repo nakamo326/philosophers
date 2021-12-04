@@ -38,6 +38,7 @@ typedef struct s_log {
 
 typedef struct s_philo
 {
+	pthread_t		th;
 	int				index;
 	int				*params;
 	pthread_mutex_t	*left;
@@ -56,11 +57,11 @@ typedef struct s_info
 
 int			print_error(char *msg);
 bool		parse_arg(t_info *info, int argc, char **argv);
-int			start_sims(t_info info);
+bool		start_sims(t_info info);
 
 void		init_info(t_info *info);
 bool		make_info(t_info *info);
-bool		init_philos(t_info *info);
+bool		init_philos(t_info info);
 int			free_info(t_info info, int ret);
 
 long		get_time(void);

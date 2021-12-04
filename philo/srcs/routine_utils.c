@@ -34,7 +34,6 @@ void	output_log(pthread_mutex_t *print, int p_num, t_log_i log_i)
 	pthread_mutex_unlock(print);
 }
 
-
 bool	is_dead(t_philo *p)
 {
 	bool	ret;

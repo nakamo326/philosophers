@@ -38,4 +38,5 @@ void	*doctor_routine(void *philo)
 		}
 		pthread_mutex_unlock(&p->access_to_last_meal);
 	}
+	return (p);
 }

@@ -1,7 +1,5 @@
 #include "philosophers.h"
 
-
-
 bool	init_info(t_info *info)
 {
 	int	i;

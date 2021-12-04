@@ -5,7 +5,8 @@ int	exit_free(t_info *info, t_philo *philos, char *err)
 	free(info->forks);
 	free(info->print);
 	free(philos);
-	if (err != NULL) {
+	if (err != NULL)
+	{
 		printf("%s\n", err);
 		return (EXIT_FAILURE);
 	}
@@ -38,7 +39,7 @@ bool	parse_arg(t_info *info, int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_info	info;
-	t_philo *philos;
+	t_philo	*philos;
 
 	if (!parse_arg(&info, argc, argv))
 		return (exit_free(NULL, NULL, "Invalid arguments."));

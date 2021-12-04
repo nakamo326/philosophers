@@ -13,12 +13,10 @@ bool	start_sims(t_info info, t_philo *philos)
 			return (false);
 		i++;
 	}
-
 	// move another func
 	for (size_t i = 0; i < 4; i++)
 	{
 		pthread_join(philos[i].th, NULL);
 	}
-	
 	return (true);
 }

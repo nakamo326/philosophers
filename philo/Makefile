@@ -9,6 +9,7 @@ SRCFILE =	srcs/init.c \
 					srcs/libft.c \
 					srcs/main.c \
 					srcs/output.c \
+					srcs/routine.c \
 					srcs/sims.c \
 					srcs/sleep_well.c
 

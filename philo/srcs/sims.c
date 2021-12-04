@@ -45,6 +45,7 @@ bool	init_philos(t_info *info)
 	num = info->params[NUM_OF_PHILOS];
 	while (i < num)
 	{
+		info->p_arr[i].index = i + 1;
 		info->p_arr[i].params = info->params;
 		info->p_arr[i].left = &info->forks[i];
 		info->p_arr[i].right = &info->forks[(i + num - 1) % num];

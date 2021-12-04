@@ -38,6 +38,7 @@ typedef struct s_log {
 
 typedef struct s_philo
 {
+	int				index;
 	int				*params;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;

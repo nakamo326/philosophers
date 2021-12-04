@@ -5,8 +5,18 @@ void	shake_forks(t_philo *p)
 	if (!is_dead(p))
 	{
 		pthread_mutex_lock(p->right);
+		output_log(p->print, p->index, TAKEN_FORK);
 		pthread_mutex_lock(p->left);
 		output_log(p->print, p->index, TAKEN_FORK);
+	}
+}
+
+void	release_forks(t_philo *p)
+{
+	if (!is_dead(p))
+	{
+		pthread_mutex_unlock(p->right);
+		pthread_mutex_unlock(p->left);
 	}
 }
 
@@ -16,7 +26,7 @@ void	eat_meal(t_philo *p)
 {
 	if (!is_dead(p))
 	{
-		output_log(p->print, p->index, EATING);
+		update_lastmeal_time(output_log(p->print, p->index, EATING), p);
 		my_usleep(p->params[TIME_TO_EAT]);
 	}
 }

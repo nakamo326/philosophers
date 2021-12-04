@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 	t_info	info;
 	t_philo	*philos;
 
+
 	if (!parse_arg(&info, argc, argv))
 		return (exit_free(NULL, NULL, "Invalid arguments."));
 	if (!init_info(&info))
@@ -48,7 +49,7 @@ int	main(int argc, char **argv)
 	philos = init_philos(&info);
 	if (philos == NULL)
 		return (exit_free(&info, philos, "failed to init philos."));
-	// start_sims(info, philos);
-	// join_philos();
+	start_sims(info, philos);
+	join_philos(info, philos);
 	return (exit_free(&info, philos, NULL));
 }

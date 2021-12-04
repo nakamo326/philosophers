@@ -13,6 +13,7 @@ void	*philo_routine(void *philo)
 	{
 		shake_forks(p);
 		eat_meal(p);
+		release_forks(p);
 		sleep_well(p);
 	}
 	return (p);
@@ -22,19 +23,20 @@ void	*doctor_routine(void *philo)
 {
 	t_philo *p;
 	long	now;
+	long	lasttime;
 
 	p = philo;
 	while (!is_dead(p) && !is_finished(p))
 	{
 		my_usleep(500);
-		pthread_mutex_lock(&p->access_to_last_meal);
 		now = get_time();
-		if (now - p->last_meal_time > p->params[TIME_TO_DIE]) {
+		lasttime = read_lastmeal_time(p);
+		if (now - lasttime >= p->params[TIME_TO_DIE]) {
 			pthread_mutex_lock(&p->info->access_to_is_dead);
 			p->info->is_dead = true;
+			output_log(p->print, p->index, DIED);
 			pthread_mutex_unlock(&p->info->access_to_is_dead);
 		}
-		pthread_mutex_unlock(&p->access_to_last_meal);
 	}
 	return (p);
 }

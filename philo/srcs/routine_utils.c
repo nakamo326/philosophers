@@ -23,15 +23,18 @@ void	my_usleep(int ms)
 	}
 }
 
-void	output_log(pthread_mutex_t *print, int p_num, t_log_i log_i)
+long	output_log(pthread_mutex_t *print, int p_num, t_log_i log_i)
 {
 	const char		*log_str[5] = {" has taken a fork",
 	" is eating", " is sleeping", " is thinking", " died"};
+	long			time;
 
 	//check is dead
+	time = get_time();
 	pthread_mutex_lock(print);
-	printf("%ld %d%s\n", get_time(), p_num, log_str[log_i]);
+	printf("%ld %d%s\n", time, p_num, log_str[log_i]);
 	pthread_mutex_unlock(print);
+	return (time);
 }
 
 bool	is_dead(t_philo *p)

@@ -30,10 +30,20 @@ typedef enum e_log_i
 	DIED,
 }	t_log_i;
 
+typedef struct s_info
+{
+	int				params[5];
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	*print;
+	pthread_mutex_t	access_to_is_dead;
+	bool			is_dead;
+}	t_info;
+
 typedef struct s_philo
 {
 	int				index;
 	pthread_t		th;
+	pthread_t		doctor;
 	int				*params;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
@@ -45,18 +55,10 @@ typedef struct s_philo
 	t_info			*info;
 }	t_philo;
 
-typedef struct s_info
-{
-	int				params[5];
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	access_to_is_dead;
-	bool			is_dead;
-}	t_info;
-
 int			exit_free(t_info *info, t_philo *philos, char *err);
 bool		parse_arg(t_info *info, int argc, char **argv);
 bool		start_sims(t_info info, t_philo *philos);
+void		join_philos(t_info info, t_philo *philos);
 
 bool		init_info(t_info *info);
 t_philo		*init_philos(t_info *info);
@@ -64,13 +66,18 @@ t_philo		*init_philos(t_info *info);
 void		*philo_routine(void *philo);
 void		shake_forks(t_philo *p);
 void		eat_meal(t_philo *p);
+void		release_forks(t_philo *p);
 void		sleep_well(t_philo *p);
+
+void		*doctor_routine(void *philo);
 
 long		get_time(void);
 void		my_usleep(int ms);
-void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
+long		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
 bool		is_dead(t_philo *p);
 bool		is_finished(t_philo *p);
+void		update_lastmeal_time(long time, t_philo *p);
+long		read_lastmeal_time(t_philo *p);
 
 // libft
 size_t		ft_strlen(const char *s);

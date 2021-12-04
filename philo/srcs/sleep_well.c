@@ -15,9 +15,10 @@ void	sleep_well(int ms)
 {
 	long	start;
 
+	//check
 	start = get_time();
 	while (get_time() - start < ms)
 	{
-		usleep(500);
+		usleep(1000);
 	}
 }

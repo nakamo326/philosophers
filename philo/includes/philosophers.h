@@ -40,10 +40,9 @@ typedef struct s_philo
 	pthread_mutex_t	*print;
 	pthread_mutex_t	access_to_last_meal;
 	long			last_meal_time;
-	pthread_mutex_t	access_to_is_dead;
-	bool			is_dead;
 	pthread_mutex_t	access_to_is_finished;
 	bool			is_finished;
+	t_info			*info;
 }	t_philo;
 
 typedef struct s_info
@@ -51,6 +50,8 @@ typedef struct s_info
 	int				params[5];
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print;
+	pthread_mutex_t	access_to_is_dead;
+	bool			is_dead;
 }	t_info;
 
 int			exit_free(t_info *info, t_philo *philos, char *err);
@@ -58,9 +59,12 @@ bool		parse_arg(t_info *info, int argc, char **argv);
 bool		start_sims(t_info info, t_philo *philos);
 
 bool		init_info(t_info *info);
-t_philo		*init_philos(t_info info);
+t_philo		*init_philos(t_info *info);
 
 void		*philo_routine(void *philo);
+void		shake_forks(t_philo *p);
+void		eat_meal(t_philo *p);
+void		sleep_well(t_philo *p);
 
 long		get_time(void);
 void		my_usleep(int ms);

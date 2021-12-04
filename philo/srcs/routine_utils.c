@@ -38,9 +38,9 @@ bool	is_dead(t_philo *p)
 {
 	bool	ret;
 
-	pthread_mutex_lock(&p->access_to_is_dead);
-	ret = p->is_dead;
-	pthread_mutex_unlock(&p->access_to_is_dead);
+	pthread_mutex_lock(&p->info->access_to_is_dead);
+	ret = p->info->is_dead;
+	pthread_mutex_unlock(&p->info->access_to_is_dead);
 	return (ret);
 }
 

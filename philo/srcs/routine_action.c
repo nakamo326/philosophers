@@ -29,8 +29,3 @@ void	sleep_well(t_philo *p)
 		my_usleep(p->params[TIME_TO_SLEEP]);
 	}
 }
-
-void	think_about_truth(t_philo *p)
-{
-
-}

@@ -9,7 +9,7 @@ void	*philo_routine(void *philo)
 	p = (t_philo *)philo;
 	i = 0;
 	limit_times = p->params[LIMIT_TIMES_TO_DIE];
-	while ((limit_times == -1 || i < limit_times) && !is_dead(p))
+	while ((limit_times == -1 || i < limit_times) && !is_dead(p) && !is_finished(p))
 	{
 		//check is_dead before every action
 		shake_forks(p);
@@ -26,7 +26,7 @@ void	*doctor_routine(void *philo)
 	long	now;
 
 	p = philo;
-	while (!is_dead(p) || !is_finished(p))
+	while (!is_dead(p) && !is_finished(p))
 	{
 		my_usleep(500);
 		pthread_mutex_lock(&p->access_to_last_meal);

@@ -11,7 +11,7 @@ long	get_time(void)
 	return (ms);
 }
 
-void	sleep_well(int ms)
+void	my_usleep(int ms)
 {
 	long	start;
 
@@ -32,4 +32,25 @@ void	output_log(pthread_mutex_t *print, int p_num, t_log_i log_i)
 	pthread_mutex_lock(print);
 	printf("%ld %d%s\n", get_time(), p_num, log_str[log_i]);
 	pthread_mutex_unlock(print);
+}
+
+
+bool	is_dead(t_philo *p)
+{
+	bool	ret;
+
+	pthread_mutex_lock(&p->access_to_is_dead);
+	ret = p->is_dead;
+	pthread_mutex_unlock(&p->access_to_is_dead);
+	return (ret);
+}
+
+bool	is_finished(t_philo *p)
+{
+	bool	ret;
+
+	pthread_mutex_lock(&p->access_to_is_finished);
+	ret = p->is_finished;
+	pthread_mutex_unlock(&p->access_to_is_finished);
+	return (ret);
 }

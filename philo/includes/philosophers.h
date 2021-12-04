@@ -42,6 +42,8 @@ typedef struct s_philo
 	long			last_meal_time;
 	pthread_mutex_t	access_to_is_dead;
 	bool			is_dead;
+	pthread_mutex_t	access_to_is_finished;
+	bool			is_finished;
 }	t_philo;
 
 typedef struct s_info
@@ -61,10 +63,9 @@ t_philo		*init_philos(t_info info);
 void		*philo_routine(void *philo);
 
 long		get_time(void);
-void		sleep_well(int ms);
-
-// logger
+void		my_usleep(int ms);
 void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
+bool		is_dead(t_philo *p);
 
 // libft
 size_t		ft_strlen(const char *s);

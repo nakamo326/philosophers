@@ -7,6 +7,7 @@ bool	init_info(t_info *info)
 	int	i;
 	int	ret;
 
+	info->print = NULL;
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->params[NUM_OF_PHILOS]);
 	if (info->forks == NULL)
 		return (false);
@@ -27,15 +28,16 @@ bool	init_info(t_info *info)
 	return (true);
 }
 
-bool	init_philos(t_philo *philos, t_info info)
+t_philo	*init_philos(t_info info)
 {
-	int	i;
-	int	num;
+	int		i;
+	int		num;
+	t_philo	*philos;
 
 	num = info.params[NUM_OF_PHILOS];
 	philos = malloc(sizeof(t_philo) * num);
 	if (philos == NULL)
-		return (false);
+		return (NULL);
 	i = 0;
 	while (i < num)
 	{
@@ -48,5 +50,5 @@ bool	init_philos(t_philo *philos, t_info info)
 		philos[i].last_meal_time = get_time();
 		i++;
 	}
-	return (true);
+	return (philos);
 }

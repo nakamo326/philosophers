@@ -49,13 +49,12 @@ typedef struct s_info
 	pthread_mutex_t	*print;
 }	t_info;
 
-int			print_error(char *msg);
+int			exit_free(t_info *info, t_philo *philos, char *err);
 bool		parse_arg(t_info *info, int argc, char **argv);
 bool		start_sims(t_info info, t_philo *philos);
 
 bool		init_info(t_info *info);
-bool		init_philos(t_philo *philos, t_info info);
-int			free_info(t_info info, t_philo *philos, int ret);
+t_philo		*init_philos(t_info info);
 
 void		*philo_routine(void *philo);
 

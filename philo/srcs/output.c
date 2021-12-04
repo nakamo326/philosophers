@@ -12,5 +12,4 @@ void	output_log(pthread_mutex_t *print, int p_num, t_log_i log_i)
 	pthread_mutex_lock(print);
 	printf("%ld %d%s\n", get_time(), p_num, log_str[log_i]);
 	pthread_mutex_unlock(print);
-	return (NULL);
 }

@@ -1,17 +1,15 @@
 #include "philosophers.h"
 
-int	free_info(t_info info, t_philo *philos, int ret)
+int	exit_free(t_info *info, t_philo *philos, char *err)
 {
+	free(info->forks);
+	free(info->print);
 	free(philos);
-	free(info.forks);
-	free(info.print);
-	return (ret);
-}
-
-int	print_error(char *msg)
-{
-	printf("%s\n", msg);
-	return (EXIT_FAILURE);
+	if (err != NULL) {
+		printf("%s\n", err);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
 bool	parse_arg(t_info *info, int argc, char **argv)
@@ -27,7 +25,7 @@ bool	parse_arg(t_info *info, int argc, char **argv)
 		if (ft_strlen(argv[i]) > 10 || !ft_isdigits(argv[i]))
 			return (false);
 		tmp = ft_atoll(argv[i]);
-		if (tmp <= 0 || tmp > INT_MAX)
+		if (tmp <= 1 || tmp > INT_MAX)
 			return (false);
 		info->params[i - 1] = tmp;
 		i++;
@@ -41,14 +39,13 @@ int	main(int argc, char **argv)
 	t_philo *philos;
 
 	if (!parse_arg(&info, argc, argv))
-		return (print_error("Invalid arguments."));
+		return (exit_free(NULL, NULL, "Invalid arguments."));
 	if (!init_info(&info))
-	{
-		print_error("failed to init infos.");
-		return (free_info(info, philos, EXIT_FAILURE));
-	}
-	init_philos(philos, info);
-	start_sims(info, philos);
-	
-	return (free_info(info, philos, EXIT_SUCCESS));
+		return (exit_free(&info, NULL, "failed to init infos."));
+	philos = init_philos(info);
+	if (philos == NULL)
+		return (exit_free(&info, philos, "failed to init philos."));
+	// start_sims(info, philos);
+	// join_philos();
+	return (free_info(info, philos, NULL));
 }

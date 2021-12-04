@@ -5,10 +5,11 @@ INCLUDES = -I./includes
 LIBS = -lpthread
 
 # SRCFILE = $(shell find srcs -type f)
-SRCFILE =	srcs/main.c \
+SRCFILE =	srcs/init.c \
 					srcs/libft.c \
-					srcs/sims.c \
+					srcs/main.c \
 					srcs/output.c \
+					srcs/sims.c \
 					srcs/sleep_well.c
 
 

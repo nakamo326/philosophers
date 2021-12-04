@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-bool	start_sims(t_info info)
+bool	start_sims(t_info info, t_philo *philos)
 {
 	int		i;
 	t_philo	*p;
@@ -8,7 +8,7 @@ bool	start_sims(t_info info)
 	i = 0;
 	while (i < info.params[NUM_OF_PHILOS])
 	{
-		p = &(info.p_arr[i]);
+		p = &(philos[i]);
 		if (pthread_create(&p->th, NULL, philo_routine, p) != 0)
 			return (false);
 		i++;
@@ -17,7 +17,7 @@ bool	start_sims(t_info info)
 	// move another func
 	for (size_t i = 0; i < 4; i++)
 	{
-		pthread_join(info.p_arr[i].th, NULL);
+		pthread_join(philos[i].th, NULL);
 	}
 	
 	return (true);

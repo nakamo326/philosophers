@@ -1,5 +1,13 @@
 #include "philosophers.h"
 
+int	free_info(t_info info, t_philo *philos, int ret)
+{
+	free(philos);
+	free(info.forks);
+	free(info.print);
+	return (ret);
+}
+
 int	print_error(char *msg)
 {
 	printf("%s\n", msg);
@@ -30,17 +38,17 @@ bool	parse_arg(t_info *info, int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_info	info;
+	t_philo *philos;
 
-	init_info(&info);
 	if (!parse_arg(&info, argc, argv))
 		return (print_error("Invalid arguments."));
-	if (!make_info(&info))
+	if (!init_info(&info))
 	{
 		print_error("failed to init infos.");
-		return (free_info(info, EXIT_FAILURE));
+		return (free_info(info, philos, EXIT_FAILURE));
 	}
-	init_philos(info);
-	start_sims(info);
+	init_philos(philos, info);
+	start_sims(info, philos);
 	
-	return (free_info(info, EXIT_SUCCESS));
+	return (free_info(info, philos, EXIT_SUCCESS));
 }

@@ -15,7 +15,7 @@ void	sleep_well(int ms)
 {
 	long	start;
 
-	//check
+	//check is dead
 	start = get_time();
 	while (get_time() - start < ms)
 	{

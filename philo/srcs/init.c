@@ -1,22 +1,8 @@
 #include "philosophers.h"
 
-void	init_info(t_info *info)
-{
-	(void)info;
-	info->p_arr = NULL;
-	info->forks = NULL;
-	info->print = NULL;
-}
 
-int	free_info(t_info info, int ret)
-{
-	free(info.p_arr);
-	free(info.forks);
-	free(info.print);
-	return (ret);
-}
 
-bool	make_info(t_info *info)
+bool	init_info(t_info *info)
 {
 	int	i;
 	int	ret;
@@ -38,27 +24,28 @@ bool	make_info(t_info *info)
 	ret = pthread_mutex_init(info->print, NULL);
 	if (ret != 0)
 		return (false);
-	info->p_arr = malloc(sizeof(t_philo) * info->params[NUM_OF_PHILOS]);
-	if (info->p_arr == NULL)
-		return (false);
 	return (true);
 }
 
-bool	init_philos(t_info info)
+bool	init_philos(t_philo *philos, t_info info)
 {
-	int				i;
-	int				num;
+	int	i;
+	int	num;
 
-	i = 0;
 	num = info.params[NUM_OF_PHILOS];
+	philos = malloc(sizeof(t_philo) * num);
+	if (philos == NULL)
+		return (false);
+	i = 0;
 	while (i < num)
 	{
-		info.p_arr[i].index = i + 1;
-		info.p_arr[i].params = info.params;
-		info.p_arr[i].left = &info.forks[i];
-		info.p_arr[i].right = &info.forks[(i + num - 1) % num];
-		info.p_arr[i].print = info.print;
-		info.p_arr[i].time_last_eating = get_time();
+		philos[i].index = i + 1;
+		philos[i].params = info.params;
+		philos[i].left = &info.forks[i];
+		philos[i].right = &info.forks[(i + num - 1) % num];
+		philos[i].print = info.print;
+		pthread_mutex_init(&philos[i].access_to_last_meal, NULL);
+		philos[i].last_meal_time = get_time();
 		i++;
 	}
 	return (true);

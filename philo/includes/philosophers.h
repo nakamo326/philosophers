@@ -30,46 +30,40 @@ typedef enum e_log_i
 	DIED,
 }	t_log_i;
 
-typedef struct s_log {
-	pthread_mutex_t	*print;
-	int				p_num;
-	t_log_i			log_i;
-}	t_log;
-
 typedef struct s_philo
 {
-	pthread_t		th;
 	int				index;
+	pthread_t		th;
 	int				*params;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*print;
-	long			time_last_eating;
+	pthread_mutex_t	access_to_last_meal;
+	long			last_meal_time;
 }	t_philo;
 
 typedef struct s_info
 {
 	int				params[5];
-	t_philo			*p_arr;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print;
 }	t_info;
 
 int			print_error(char *msg);
 bool		parse_arg(t_info *info, int argc, char **argv);
-bool		start_sims(t_info info);
+bool		start_sims(t_info info, t_philo *philos);
 
-void		init_info(t_info *info);
-bool		make_info(t_info *info);
-bool		init_philos(t_info info);
-int			free_info(t_info info, int ret);
+bool		init_info(t_info *info);
+bool		init_philos(t_philo *philos, t_info info);
+int			free_info(t_info info, t_philo *philos, int ret);
+
+void		*philo_routine(void *philo);
 
 long		get_time(void);
 void		sleep_well(int ms);
 
 // logger
 void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
-void		*output_thread(void *log);
 
 // libft
 size_t		ft_strlen(const char *s);

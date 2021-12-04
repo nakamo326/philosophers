@@ -40,6 +40,8 @@ typedef struct s_philo
 	pthread_mutex_t	*print;
 	pthread_mutex_t	access_to_last_meal;
 	long			last_meal_time;
+	pthread_mutex_t	access_to_is_dead;
+	bool			is_dead;
 }	t_philo;
 
 typedef struct s_info

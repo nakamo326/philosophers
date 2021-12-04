@@ -66,6 +66,7 @@ long		get_time(void);
 void		my_usleep(int ms);
 void		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
 bool		is_dead(t_philo *p);
+bool		is_finished(t_philo *p);
 
 // libft
 size_t		ft_strlen(const char *s);

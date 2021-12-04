@@ -30,6 +30,8 @@ bool	parse_arg(t_info *info, int argc, char **argv)
 		info->params[i - 1] = tmp;
 		i++;
 	}
+	if (argc == 5)
+		info->params[LIMIT_TIMES_TO_DIE] = -1;
 	return (true);
 }
 

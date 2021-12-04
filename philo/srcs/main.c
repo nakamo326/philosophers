@@ -47,5 +47,5 @@ int	main(int argc, char **argv)
 		return (exit_free(&info, philos, "failed to init philos."));
 	// start_sims(info, philos);
 	// join_philos();
-	return (free_info(info, philos, NULL));
+	return (exit_free(&info, philos, NULL));
 }

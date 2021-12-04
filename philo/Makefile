@@ -8,10 +8,9 @@ LIBS = -lpthread
 SRCFILE =	srcs/init.c \
 					srcs/libft.c \
 					srcs/main.c \
-					srcs/output.c \
+					srcs/routine_utils.c \
 					srcs/routine.c \
-					srcs/sims.c \
-					srcs/sleep_well.c
+					srcs/sims.c
 
 
 SRCDIRS = $(dir $(SRCFILE))

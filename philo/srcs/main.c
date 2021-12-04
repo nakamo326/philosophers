@@ -33,10 +33,10 @@ int	main(int argc, char **argv)
 
 	init_info(&info);
 	if (!parse_arg(&info, argc, argv))
-		return (print_error("Invalid arguments.\n"));
+		return (print_error("Invalid arguments."));
 	if (!make_info(&info))
 	{
-		print_error("failed to init infos.\n");
+		print_error("failed to init infos.");
 		return (free_info(info, EXIT_FAILURE));
 	}
 	init_philos(&info);

@@ -8,6 +8,14 @@ void	init_info(t_info *info)
 	info->print = NULL;
 }
 
+int	free_info(t_info info, int ret)
+{
+	free(info.p_arr);
+	free(info.forks);
+	free(info.print);
+	return (ret);
+}
+
 bool	make_info(t_info *info)
 {
 	int	i;
@@ -54,12 +62,4 @@ bool	init_philos(t_info *info)
 		i++;
 	}
 	return (true);
-}
-
-int	free_info(t_info info, int ret)
-{
-	free(info.p_arr);
-	free(info.forks);
-	free(info.print);
-	return (ret);
 }

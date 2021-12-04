@@ -20,12 +20,12 @@ void	*output_thread(void *log)
 	const char		*log_str[5] = {" has taken a fork",
 	" is eating", " is sleeping", " is thinking", " died" };
 	t_log			*l;
-	struct timeval	tv;
+	long			time;
 
 	l = (t_log *)log;
-	gettimeofday(&tv, NULL);
+	time = get_time();
 	pthread_mutex_lock(l->print);
-	printf("%ld %d%s\n", tv.tv_sec, l->p_num, log_str[l->log_i]);
+	printf("%ld %d%s\n", time, l->p_num, log_str[l->log_i]);
 	pthread_mutex_unlock(l->print);
 	return (NULL);
 }

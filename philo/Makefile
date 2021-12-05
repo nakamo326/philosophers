@@ -6,8 +6,8 @@ LIBS = -lpthread
 
 # SRCFILE = $(shell find srcs -type f)
 SRCFILE =	srcs/init.c \
-					srcs/libft.c \
 					srcs/main.c \
+					srcs/parse_arg.c \
 					srcs/routine_action.c \
 					srcs/routine_utils.c \
 					srcs/routine.c \

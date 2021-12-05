@@ -57,7 +57,6 @@ typedef struct s_philo
 }	t_philo;
 
 int			exit_free(t_info *info, t_philo *philos, char *err);
-bool		parse_arg(t_info *info, int argc, char **argv);
 bool		start_sims(t_info info, t_philo *philos);
 void		join_philos(t_info info, t_philo *philos);
 
@@ -80,7 +79,8 @@ bool		is_fullfilled(t_philo *p);
 void		update_lastmeal_time(long time, t_philo *p);
 long		read_lastmeal_time(t_philo *p);
 
-// libft
+// parse
+bool		parse_arg(t_info *info, int argc, char **argv);
 size_t		ft_strlen(const char *s);
 bool		ft_isdigits(char *s);
 long long	ft_atoll(const char *nptr);

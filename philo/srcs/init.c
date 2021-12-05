@@ -1,5 +1,21 @@
 #include "philosophers.h"
 
+int	exit_free(t_info *info, t_philo *philos, char *err)
+{
+	if (info != NULL)
+	{
+		free(info->forks);
+		free(info->print);
+	}
+	free(philos);
+	if (err != NULL)
+	{
+		printf("%s\n", err);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
 bool	init_info(t_info *info)
 {
 	int	i;

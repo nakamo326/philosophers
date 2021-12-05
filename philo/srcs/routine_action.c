@@ -33,7 +33,7 @@ void	eat_meal(t_philo *p)
 	{
 		pthread_mutex_lock(&p->info->access_to_fullfill);
 		p->info->fullfill_num++;
-		pthread_mutex_lock(&p->info->access_to_fullfill);
+		pthread_mutex_unlock(&p->info->access_to_fullfill);
 	}
 }
 

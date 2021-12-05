@@ -36,9 +36,9 @@ bool	init_info(t_info *info)
 	info->print = malloc(sizeof(pthread_mutex_t));
 	if (info->print == NULL)
 		return (false);
-	if (pthread_mutex_init(info->print, NULL) ||
-	pthread_mutex_init(&info->access_to_is_dead, NULL) ||
-	pthread_mutex_init(&info->access_to_fullfill, NULL))
+	if (pthread_mutex_init(info->print, NULL)
+		|| pthread_mutex_init(&info->access_to_is_dead, NULL)
+		|| pthread_mutex_init(&info->access_to_fullfill, NULL))
 		return (false);
 	info->is_dead = false;
 	info->fullfill_num = 0;

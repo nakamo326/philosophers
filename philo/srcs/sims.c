@@ -9,8 +9,8 @@ bool	start_sims(t_info info, t_philo *philos)
 	while (i < info.params[NUM_OF_PHILOS])
 	{
 		p = &(philos[i]);
-		if (pthread_create(&p->th, NULL, philo_routine, p) != 0 ||
-		pthread_create(&p->doctor, NULL, doctor_routine, p) != 0 )
+		if (pthread_create(&p->th, NULL, philo_routine, p)
+			|| pthread_create(&p->doctor, NULL, doctor_routine, p))
 			return (false);
 		i++;
 	}

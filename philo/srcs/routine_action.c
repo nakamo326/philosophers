@@ -2,10 +2,20 @@
 
 void	shake_forks(t_philo *p)
 {
-	pthread_mutex_lock(p->right);
-	output_log(p, TAKEN_FORK);
-	pthread_mutex_lock(p->left);
-	output_log(p, TAKEN_FORK);
+	if (p->index % 2 == 0)
+	{
+		pthread_mutex_lock(p->right);
+		output_log(p, TAKEN_FORK);
+		pthread_mutex_lock(p->left);
+		output_log(p, TAKEN_FORK);
+	}
+	else
+	{
+		pthread_mutex_lock(p->left);
+		output_log(p, TAKEN_FORK);
+		pthread_mutex_lock(p->right);
+		output_log(p, TAKEN_FORK);
+	}
 }
 
 void	release_forks(t_philo *p)

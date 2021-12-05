@@ -11,6 +11,8 @@ void	*philo_routine(void *philo)
 		output_log(p, TAKEN_FORK);
 		return (NULL);
 	}
+	if (p->index % 2 == 0)
+		my_usleep(1);
 	while (!is_dead(p) && !is_fullfilled(p))
 	{
 		shake_forks(p);
@@ -33,13 +35,13 @@ void	*doctor_routine(void *philo)
 		usleep(1000);
 		now = get_time();
 		lasttime = read_lastmeal_time(p);
-		if (now - lasttime >= p->params[TIME_TO_DIE])
+		pthread_mutex_lock(&p->info->access_to_is_dead);
+		if (now - lasttime >= p->params[TIME_TO_DIE] && p->info->is_dead == false)
 		{
-			output_log(p, DIED);
-			pthread_mutex_lock(&p->info->access_to_is_dead);
+			printf("%ld %d died\n", now, p->index);
 			p->info->is_dead = true;
-			pthread_mutex_unlock(&p->info->access_to_is_dead);
 		}
+		pthread_mutex_unlock(&p->info->access_to_is_dead);
 	}
 	return (NULL);
 }

@@ -68,6 +68,7 @@ void		shake_forks(t_philo *p);
 void		eat_meal(t_philo *p);
 void		release_forks(t_philo *p);
 void		sleep_well(t_philo *p);
+void		think_about_truth(t_philo *p);
 
 void		*doctor_routine(void *philo);
 

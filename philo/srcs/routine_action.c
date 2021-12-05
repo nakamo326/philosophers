@@ -31,3 +31,8 @@ void	sleep_well(t_philo *p)
 	output_log(p, SLEEPING);
 	my_usleep(p->params[TIME_TO_SLEEP]);
 }
+
+void	think_about_truth(t_philo *p)
+{
+	output_log(p, THINKING);
+}

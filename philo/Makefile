@@ -6,13 +6,14 @@ LIBS = -lpthread
 
 # SRCFILE = $(shell find srcs -type f)
 SRCFILE =	srcs/init.c \
+					srcs/kitchen_timer.c \
+					srcs/log.c \
 					srcs/main.c \
 					srcs/parse_arg.c \
 					srcs/routine_action.c \
 					srcs/routine_utils.c \
 					srcs/routine.c \
-					srcs/sims.c \
-					srcs/update_mealtime.c
+					srcs/sims.c
 
 
 SRCDIRS = $(dir $(SRCFILE))

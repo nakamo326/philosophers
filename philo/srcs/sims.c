@@ -19,11 +19,16 @@ bool	start_sims(t_info info, t_philo *philos)
 
 void	join_philos(t_info info, t_philo *philos)
 {
-	(void)info;
-	for (size_t i = 0; i < 4; i++)
+	int	i;
+	int	num;
+
+	i = 0;
+	num = info.params[NUM_OF_PHILOS];
+	while (i < num)
 	{
-		pthread_join(philos[i].th, NULL);
 		pthread_join(philos[i].doctor, NULL);
+		pthread_join(philos[i].th, NULL);
+		i++;
 	}
 	return ;
 }

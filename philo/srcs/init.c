@@ -45,7 +45,6 @@ t_philo	*init_philos(t_info *info)
 		philos[i].right = &info->forks[(i + num - 1) % num];
 		philos[i].print = info->print;
 		pthread_mutex_init(&philos[i].access_to_last_meal, NULL);
-		philos[i].last_meal_time = get_time();
 		pthread_mutex_init(&philos[i].access_to_is_finished, NULL);
 		philos[i].is_finished = false;
 		philos[i].info = info;

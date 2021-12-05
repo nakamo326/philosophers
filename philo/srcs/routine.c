@@ -19,6 +19,7 @@ void	*philo_routine(void *philo)
 		eat_meal(p);
 		release_forks(p);
 		sleep_well(p);
+		think_about_truth(p);
 	}
 	return (NULL);
 }

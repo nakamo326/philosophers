@@ -2,40 +2,32 @@
 
 void	shake_forks(t_philo *p)
 {
-	if (!is_dead(p))
-	{
-		pthread_mutex_lock(p->right);
-		output_log(p->print, p->index, TAKEN_FORK);
-		pthread_mutex_lock(p->left);
-		output_log(p->print, p->index, TAKEN_FORK);
-	}
+	pthread_mutex_lock(p->right);
+	output_log(p, TAKEN_FORK);
+	pthread_mutex_lock(p->left);
+	output_log(p, TAKEN_FORK);
 }
 
 void	release_forks(t_philo *p)
 {
-	if (!is_dead(p))
-	{
-		pthread_mutex_unlock(p->right);
-		pthread_mutex_unlock(p->left);
-	}
+	pthread_mutex_unlock(p->right);
+	pthread_mutex_unlock(p->left);
 }
-
-// change is_finished in eat_meal()
 
 void	eat_meal(t_philo *p)
 {
-	if (!is_dead(p))
-	{
-		update_lastmeal_time(output_log(p->print, p->index, EATING), p);
-		my_usleep(p->params[TIME_TO_EAT]);
+	update_lastmeal_time(output_log(p, EATING), p);
+	my_usleep(p->params[TIME_TO_EAT]);
+	p->times_of_finished_meal++;
+	if (p->times_of_finished_meal == p->params[LIMIT_TIMES_TO_DIE]){
+		pthread_mutex_lock(&p->info->access_to_fullfill);
+		p->info->fullfill_num++;
+		pthread_mutex_lock(&p->info->access_to_fullfill);
 	}
 }
 
 void	sleep_well(t_philo *p)
 {
-	if (!is_dead(p) && !is_finished(p))
-	{
-		output_log(p->print, p->index, SLEEPING);
-		my_usleep(p->params[TIME_TO_SLEEP]);
-	}
+	output_log(p, SLEEPING);
+	my_usleep(p->params[TIME_TO_SLEEP]);
 }

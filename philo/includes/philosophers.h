@@ -37,10 +37,13 @@ typedef struct s_info
 	pthread_mutex_t	*print;
 	pthread_mutex_t	access_to_is_dead;
 	bool			is_dead;
+	pthread_mutex_t	access_to_fullfill;
+	int				fullfill_num;
 }	t_info;
 
 typedef struct s_philo
 {
+	t_info			*info;
 	int				index;
 	pthread_t		th;
 	pthread_t		doctor;
@@ -50,9 +53,7 @@ typedef struct s_philo
 	pthread_mutex_t	*print;
 	pthread_mutex_t	access_to_last_meal;
 	long			last_meal_time;
-	pthread_mutex_t	access_to_is_finished;
-	bool			is_finished;
-	t_info			*info;
+	long			times_of_finished_meal;
 }	t_philo;
 
 int			exit_free(t_info *info, t_philo *philos, char *err);
@@ -73,9 +74,9 @@ void		*doctor_routine(void *philo);
 
 long		get_time(void);
 void		my_usleep(int ms);
-long		output_log(pthread_mutex_t *print, int p_num, t_log_i log_i);
+long		output_log(t_philo *p, t_log_i log_i);
 bool		is_dead(t_philo *p);
-bool		is_finished(t_philo *p);
+bool		is_fullfilled(t_philo *p);
 void		update_lastmeal_time(long time, t_philo *p);
 long		read_lastmeal_time(t_philo *p);
 

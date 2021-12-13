@@ -31,12 +31,12 @@ bool	init_info(t_info *info)
 			return (false);
 		i++;
 	}
-	if (pthread_mutex_init(&info->print, NULL)
-		|| pthread_mutex_init(&info->access_to_is_dead, NULL)
-		|| pthread_mutex_init(&info->access_to_fullfill, NULL))
+	if (pthread_mutex_init(&info->print, NULL))
 		return (false);
+	pthread_mutex_lock(&info->print);
 	info->is_dead = false;
 	info->fullfill_num = 0;
+	pthread_mutex_unlock(&info->print);
 	return (true);
 }
 

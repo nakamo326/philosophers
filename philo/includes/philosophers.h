@@ -35,9 +35,7 @@ typedef struct s_info
 	int				params[5];
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
-	pthread_mutex_t	access_to_is_dead;
 	bool			is_dead;
-	pthread_mutex_t	access_to_fullfill;
 	int				fullfill_num;
 }	t_info;
 

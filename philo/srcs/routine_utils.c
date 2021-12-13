@@ -4,9 +4,9 @@ bool	is_dead(t_philo *p)
 {
 	bool	ret;
 
-	pthread_mutex_lock(&p->info->access_to_is_dead);
+	pthread_mutex_lock(&p->info->print);
 	ret = p->info->is_dead;
-	pthread_mutex_unlock(&p->info->access_to_is_dead);
+	pthread_mutex_unlock(&p->info->print);
 	return (ret);
 }
 
@@ -14,9 +14,9 @@ bool	is_fullfilled(t_philo *p)
 {
 	bool	ret;
 
-	pthread_mutex_lock(&p->info->access_to_fullfill);
+	pthread_mutex_lock(&p->info->print);
 	ret = (p->info->fullfill_num == p->params[NUM_OF_PHILOS]);
-	pthread_mutex_unlock(&p->info->access_to_fullfill);
+	pthread_mutex_unlock(&p->info->print);
 	return (ret);
 }
 

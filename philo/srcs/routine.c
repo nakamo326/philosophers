@@ -37,13 +37,11 @@ void	*doctor_routine(void *philo)
 		pthread_mutex_lock(&p->info->print);
 		now = get_time();
 		lasttime = read_lastmeal_time(p);
-		pthread_mutex_lock(&p->info->access_to_is_dead);
 		if (now - lasttime >= p->params[TIME_TO_DIE] && p->info->is_dead == false)
 		{
 			printf("%ld %d died\n", now, p->index);
 			p->info->is_dead = true;
 		}
-		pthread_mutex_unlock(&p->info->access_to_is_dead);
 		pthread_mutex_unlock(&p->info->print);
 	}
 	return (NULL);

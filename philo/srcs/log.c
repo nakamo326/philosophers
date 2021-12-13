@@ -10,7 +10,6 @@ long	output_log(t_philo *p, const char *str)
 		&& !(p->info->fullfill_num == p->info->params[NUM_OF_PHILOS]))
 	{
 		printf("%ld %d%s\n", time, p->index, str);
-		printf("%ld %s\n", time, str);
 	}
 	pthread_mutex_unlock(&p->info->print);
 	return (time);

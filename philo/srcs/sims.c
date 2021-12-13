@@ -26,8 +26,10 @@ void	join_philos(t_info info, t_philo *philos)
 	num = info.params[NUM_OF_PHILOS];
 	while (i < num)
 	{
-		pthread_join(philos[i].doctor, NULL);
-		pthread_join(philos[i].th, NULL);
+		if (pthread_join(philos[i].doctor, NULL))
+			printf("error");
+		if (pthread_join(philos[i].th, NULL))
+			printf("error");
 		i++;
 	}
 	return ;

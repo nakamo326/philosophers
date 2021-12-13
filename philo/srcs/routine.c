@@ -34,6 +34,7 @@ void	*doctor_routine(void *philo)
 	while (!is_dead(p) && !is_fullfilled(p))
 	{
 		usleep(1000);
+		pthread_mutex_lock(&p->info->print);
 		now = get_time();
 		lasttime = read_lastmeal_time(p);
 		pthread_mutex_lock(&p->info->access_to_is_dead);
@@ -43,6 +44,7 @@ void	*doctor_routine(void *philo)
 			p->info->is_dead = true;
 		}
 		pthread_mutex_unlock(&p->info->access_to_is_dead);
+		pthread_mutex_unlock(&p->info->print);
 	}
 	return (NULL);
 }

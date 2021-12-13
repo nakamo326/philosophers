@@ -6,12 +6,12 @@ long	output_log(t_philo *p, t_log_i log_i)
 	" is eating", " is sleeping", " is thinking", " died"};
 	long			time;
 
+	pthread_mutex_lock(&p->info->print);
 	time = get_time();
 	if (!is_dead(p) && !is_fullfilled(p))
 	{
-		pthread_mutex_lock(p->print);
 		printf("%ld %d%s\n", time, p->index, log_str[log_i]);
-		pthread_mutex_unlock(p->print);
 	}
+	pthread_mutex_unlock(&p->info->print);
 	return (time);
 }

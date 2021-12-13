@@ -27,9 +27,9 @@ void	release_forks(t_philo *p)
 void	eat_meal(t_philo *p)
 {
 	update_lastmeal_time(output_log(p, EATING), p);
-	my_usleep(p->params[TIME_TO_EAT]);
+	my_usleep(p->info->params[TIME_TO_EAT]);
 	p->times_of_finished_meal++;
-	if (p->times_of_finished_meal == p->params[LIMIT_TIMES_TO_DIE])
+	if (p->times_of_finished_meal == p->info->params[LIMIT_TIMES_TO_DIE])
 	{
 		pthread_mutex_lock(&p->info->print);
 		p->info->fullfill_num++;
@@ -40,7 +40,7 @@ void	eat_meal(t_philo *p)
 void	sleep_well(t_philo *p)
 {
 	output_log(p, SLEEPING);
-	my_usleep(p->params[TIME_TO_SLEEP]);
+	my_usleep(p->info->params[TIME_TO_SLEEP]);
 }
 
 void	think_about_truth(t_philo *p)

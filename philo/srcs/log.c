@@ -9,7 +9,7 @@ long	output_log(t_philo *p, t_log_i log_i)
 	time = get_time();
 	pthread_mutex_lock(&p->info->print);
 	if (!p->info->is_dead
-		&& !(p->info->fullfill_num == p->params[NUM_OF_PHILOS]))
+		&& !(p->info->fullfill_num == p->info->params[NUM_OF_PHILOS]))
 	{
 		printf("%ld %d%s\n", time, p->index, log_str[log_i]);
 	}

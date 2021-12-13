@@ -45,7 +45,6 @@ typedef struct s_philo
 	int				index;
 	pthread_t		th;
 	pthread_t		doctor;
-	int				*params;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*print;

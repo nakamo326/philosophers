@@ -53,7 +53,6 @@ t_philo	*init_philos(t_info *info)
 	{
 		philos[i].info = info;
 		philos[i].index = i + 1;
-		philos[i].params = info->params;
 		philos[i].left = &info->forks[i];
 		philos[i].right = &info->forks[(i + num - 1) % num];
 		pthread_mutex_init(&philos[i].access_to_last_meal, NULL);

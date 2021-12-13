@@ -12,6 +12,11 @@
 # include <limits.h>
 # include <errno.h>
 
+# define TAKEN_FORK " has taken a fork"
+# define EATING " is eating"
+# define SLEEPING " is sleeping"
+# define THINKING " is thinking"
+
 typedef enum e_arg_index
 {
 	NUM_OF_PHILOS,
@@ -20,16 +25,6 @@ typedef enum e_arg_index
 	TIME_TO_SLEEP,
 	LIMIT_TIMES_TO_DIE,
 }	t_arg_index;
-
-typedef enum e_log_i
-{
-	TAKEN_FORK,
-	EATING,
-	SLEEPING,
-	THINKING,
-	DIED,
-}	t_log_i;
-
 typedef struct s_info
 {
 	int				params[5];
@@ -54,8 +49,8 @@ typedef struct s_philo
 }	t_philo;
 
 int			exit_free(t_info *info, t_philo *philos, char *err);
-bool		start_sims(t_info info, t_philo *philos);
-void		join_philos(t_info info, t_philo *philos);
+bool		start_sims(t_philo *philos);
+void		join_philos(t_philo *philos);
 
 bool		init_info(t_info *info);
 t_philo		*init_philos(t_info *info);
@@ -71,7 +66,7 @@ void		*doctor_routine(void *philo);
 
 long		get_time(void);
 void		my_usleep(int ms);
-long		output_log(t_philo *p, t_log_i log_i);
+long		output_log(t_philo *p, const char *str);
 bool		is_dead(t_philo *p);
 bool		is_fullfilled(t_philo *p);
 void		update_lastmeal_time(long time, t_philo *p);

@@ -31,11 +31,9 @@ void	eat_meal(t_philo *p)
 	p->times_of_finished_meal++;
 	if (p->times_of_finished_meal == p->params[LIMIT_TIMES_TO_DIE])
 	{
-	//	pthread_mutex_lock(&p->info->access_to_fullfill);
 		pthread_mutex_lock(&p->info->print);
 		p->info->fullfill_num++;
 		pthread_mutex_unlock(&p->info->print);
-	//	pthread_mutex_unlock(&p->info->access_to_fullfill);
 	}
 }
 

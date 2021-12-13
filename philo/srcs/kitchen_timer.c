@@ -15,7 +15,6 @@ void	my_usleep(int ms)
 {
 	long	start;
 
-	//check is dead
 	start = get_time();
 	while (get_time() - start < ms)
 	{

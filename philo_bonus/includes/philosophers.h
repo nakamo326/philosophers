@@ -4,9 +4,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
 # include <sys/time.h>
 # include <pthread.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <semaphore.h>
 
 # include <stdbool.h>
 # include <limits.h>

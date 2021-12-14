@@ -19,6 +19,25 @@ bool	start_sims(t_philo *philo)
 	return (true);
 }
 
+void	count_ticket(t_info *info) {
+	int i;
+
+	if (info->params[LIMIT_TIMES_TO_DIE] == -1)
+		return;
+	i = 0;
+	while (i < info->params[NUM_OF_PHILOS])
+	{
+		sem_wait(info->ticket);
+		i++;
+	}
+	i = 0;
+	while(i < info->params[NUM_OF_PHILOS])
+	{
+		kill(info->procs[i], SIGINT);
+		i++;
+	}
+}
+
 void	join_philos(t_info *info)
 {
 	int	i;

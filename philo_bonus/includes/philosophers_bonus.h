@@ -8,9 +8,10 @@
 # include <sys/wait.h>
 # include <sys/time.h>
 # include <pthread.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <semaphore.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
+# include <signal.h>
 
 # include <stdbool.h>
 # include <limits.h>
@@ -21,8 +22,9 @@
 # define SLEEPING " is sleeping"
 # define THINKING " is thinking"
 
-# define SEM_FORM "sem_fork"
+# define SEM_FORK "sem_fork"
 # define SEM_PRINT "sem_print"
+# define SEM_TICKET "sem_ticket"
 
 typedef enum e_arg_index
 {
@@ -38,8 +40,8 @@ typedef struct s_info
 	pid_t	*procs;
 	sem_t	*forks;
 	sem_t	*print;
+	sem_t	*ticket;
 	bool	is_dead;
-	int		fullfill_num;
 }	t_info;
 
 typedef struct s_philo
@@ -53,6 +55,7 @@ typedef struct s_philo
 
 int			exit_free(t_info *info, t_philo *philo, char *err);
 bool		start_sims(t_philo *philo);
+void		count_ticket(t_info *info);
 void		join_philos(t_info *info);
 void		unlink_all_sem();
 

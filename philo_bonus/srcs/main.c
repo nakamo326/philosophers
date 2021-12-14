@@ -1,8 +1,10 @@
 #include "philosophers_bonus.h"
 
 void	unlink_all_sem() {
-	sem_unlink(SEM_FORM);
+	sem_unlink("print");
+	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_PRINT);
+	sem_unlink(SEM_TICKET);
 }
 
 int	main(int argc, char **argv)
@@ -19,6 +21,7 @@ int	main(int argc, char **argv)
 	if (philo == NULL)
 		return (exit_free(&info, philo, "failed to init philo."));
 	start_sims(philo);
+	count_ticket(&info);
 	join_philos(&info);
 	unlink_all_sem();
 	return (exit_free(&info, philo, NULL));

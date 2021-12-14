@@ -1,14 +1,8 @@
 #include "philosophers_bonus.h"
 
-void	take_ticket(t_philo *philo){
-	if (philo->info->params[LIMIT_TIMES_TO_DIE] != -1)
-		sem_wait(philo->info->ticket);
-}
-
 void	philo_routine(t_philo *philo)
 {
 	update_lastmeal_time(get_time(), philo);
-	take_ticket(philo);
 	if (pthread_create(&philo->doctor, NULL, doctor_routine, philo)
 		|| 	pthread_detach(philo->doctor))
 		exit(exit_free(philo->info, philo, "failed to create thread"));
@@ -19,7 +13,7 @@ void	philo_routine(t_philo *philo)
 	}
 	if (philo->index % 2 == 0)
 		my_usleep(1);
-	while (!is_dead(philo))
+	while (true)
 	{
 		shake_forks(philo);
 		eat_meal(philo);
@@ -37,19 +31,19 @@ void	*doctor_routine(void *philo)
 	long	lasttime;
 
 	p = (t_philo *)philo;
-	while (!is_dead(p))
+	while (true)
 	{
 		usleep(1000);
 		now = get_time();
 		lasttime = read_lastmeal_time(p);
-		sem_wait(p->info->print);
-		if (now - lasttime >= p->info->params[TIME_TO_DIE]
-			&& p->info->is_dead == false)
+		if (now - lasttime >= p->info->params[TIME_TO_DIE])
 		{
+			sem_wait(p->info->print);
 			printf("%ld %d died\n", now, p->index);
-			p->info->is_dead = true;
+			sem_post(p->info->print);
+			sem_post(p->info->is_dead);
+			exit(EXIT_SUCCESS);
 		}
-		sem_post(p->info->print);
 	}
 	return (NULL);
 }

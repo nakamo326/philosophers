@@ -25,6 +25,7 @@
 # define SEM_FORK "sem_fork"
 # define SEM_PRINT "sem_print"
 # define SEM_TICKET "sem_ticket"
+# define SEM_DEAD "dem_dead"
 
 typedef enum e_arg_index
 {
@@ -41,7 +42,7 @@ typedef struct s_info
 	sem_t	*forks;
 	sem_t	*print;
 	sem_t	*ticket;
-	bool	is_dead;
+	sem_t	*is_dead;
 }	t_info;
 
 typedef struct s_philo
@@ -55,8 +56,8 @@ typedef struct s_philo
 
 int			exit_free(t_info *info, t_philo *philo, char *err);
 bool		start_sims(t_philo *philo);
-void		count_ticket(t_info *info);
-void		join_philos(t_info *info);
+void		monitor_dead(t_info *info);
+void		wait_philos(t_info *info);
 void		unlink_all_sem();
 
 bool		init_info(t_info *info);

@@ -20,20 +20,19 @@ bool	init_info(t_info *info)
 	info->procs = malloc(sizeof(pid_t) * info->params[NUM_OF_PHILOS]);
 	if(info->procs == NULL)
 		return (false);
-	info->forks = sem_open(SEM_FORK, O_CREAT | O_EXCL, S_IRWXU, info->params[NUM_OF_PHILOS]);
-	if (info->forks == SEM_FAILED)
-		return (false);
+	info->forks = sem_open(SEM_FORK, O_CREAT | O_EXCL,
+		S_IRWXU, info->params[NUM_OF_PHILOS]);
 	info->print = sem_open(SEM_PRINT, O_CREAT | O_EXCL, S_IRWXU, 1);
-	if (info->print == SEM_FAILED)
+	info->is_dead = sem_open(SEM_DEAD, O_CREAT | O_EXCL, S_IRWXU, 0);
+	if (info->forks == SEM_FAILED || info->print == SEM_FAILED
+		|| info->is_dead == SEM_FAILED)
 		return (false);
 	if (info->params[LIMIT_TIMES_TO_DIE] != -1)
 	{
-		info->ticket = sem_open(SEM_TICKET,O_CREAT | O_EXCL, S_IRWXU,
-			info->params[NUM_OF_PHILOS]);
+		info->ticket = sem_open(SEM_TICKET,O_CREAT | O_EXCL, S_IRWXU, 0);
 		if (info->ticket == SEM_FAILED)
 			return (false);
 	}
-	info->is_dead = false;
 	return (true);
 }
 

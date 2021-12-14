@@ -40,12 +40,9 @@ typedef struct s_philo
 {
 	t_info		*info;
 	int			index;
-	pthread_t	th;
+	pid_t		proc;
 	pthread_t	doctor;
-	sem_t		*left;
-	sem_t		*right;
 	sem_t		*print;
-	sem_t		*access_to_last_meal;
 	long		last_meal_time;
 	long		times_of_finished_meal;
 }	t_philo;

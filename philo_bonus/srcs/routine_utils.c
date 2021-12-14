@@ -1,5 +1,6 @@
 #include "philosophers_bonus.h"
 
+// need to fix
 bool	is_dead(t_philo *p)
 {
 	bool	ret;

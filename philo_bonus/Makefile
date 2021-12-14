@@ -6,10 +6,10 @@ LIBS = -lpthread
 
 # SRCFILE = $(shell find srcs -type f)
 SRCFILE =	srcs/init.c \
-					srcs/kitchen_timer.c \
+					srcs/kitchen_timer_bonus.c \
 					srcs/log.c \
 					srcs/main.c \
-					srcs/parse_arg.c \
+					srcs/parse_arg_bonus.c \
 					srcs/routine_action.c \
 					srcs/routine_utils.c \
 					srcs/routine.c \

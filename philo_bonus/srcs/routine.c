@@ -13,7 +13,7 @@ void	philo_routine(t_philo *philo)
 	}
 	if (philo->index % 2 == 0)
 		my_usleep(1);
-	while (true)
+	while (true) // want to break if dead or fullfilled
 	{
 		shake_forks(philo);
 		eat_meal(philo);

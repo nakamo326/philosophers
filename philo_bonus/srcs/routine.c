@@ -7,10 +7,11 @@ void	philo_routine(t_philo *philo)
 	if (philo->info->params[NUM_OF_PHILOS] == 1)
 	{
 		output_log(philo, TAKEN_FORK);
+		pthread_join(philo->doctor, NULL);
 		exit(exit_free(philo->info, philo, NULL));
 	}
-	// if (p->index % 2 == 0)
-	// 	my_usleep(1);
+	if (philo->index % 2 == 0)
+		my_usleep(1);
 	while (!is_dead(philo) && !is_fullfilled(philo))
 	{
 		shake_forks(philo);

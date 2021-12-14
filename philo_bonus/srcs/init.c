@@ -17,13 +17,15 @@ int	exit_free(t_info *info, t_philo *philo, char *err)
 
 bool	init_info(t_info *info)
 {
+	sem_unlink("forks");
+	sem_unlink("print"); // make unlink func
 	info->procs = malloc(sizeof(pid_t) * info->params[NUM_OF_PHILOS]);
 	if(info->procs == NULL)
 		return (false);
-	info->forks = sem_open("forks", O_CREAT, O_RDWR,info->params[NUM_OF_PHILOS]);
+	info->forks = sem_open("forks", O_CREAT | O_EXCL, S_IRWXU, info->params[NUM_OF_PHILOS]);
 	if (info->forks == SEM_FAILED)
 		return (false);
-	info->print = sem_open("print", O_CREAT, O_RDWR,info->params[NUM_OF_PHILOS]);
+	info->print = sem_open("print", O_CREAT | O_EXCL, S_IRWXU, 1);
 	if (info->print == SEM_FAILED)
 		return (false);
 	info->is_dead = false;

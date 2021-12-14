@@ -14,6 +14,7 @@ bool	start_sims(t_philo *philo)
 		if (philo->info->procs[i] == 0) {
 			philo_routine(philo);
 		}
+		i++;
 	}
 	return (true);
 }

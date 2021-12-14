@@ -29,25 +29,25 @@ typedef enum e_arg_index
 }	t_arg_index;
 typedef struct s_info
 {
-	int				params[5];
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print;
-	bool			is_dead;
-	int				fullfill_num;
+	int		params[5];
+	sem_t	*forks;
+	sem_t	*print;
+	bool	is_dead;
+	int		fullfill_num;
 }	t_info;
 
 typedef struct s_philo
 {
-	t_info			*info;
-	int				index;
-	pthread_t		th;
-	pthread_t		doctor;
-	pthread_mutex_t	*left;
-	pthread_mutex_t	*right;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	access_to_last_meal;
-	long			last_meal_time;
-	long			times_of_finished_meal;
+	t_info		*info;
+	int			index;
+	pthread_t	th;
+	pthread_t	doctor;
+	sem_t		*left;
+	sem_t		*right;
+	sem_t		*print;
+	sem_t		*access_to_last_meal;
+	long		last_meal_time;
+	long		times_of_finished_meal;
 }	t_philo;
 
 int			exit_free(t_info *info, t_philo *philos, char *err);

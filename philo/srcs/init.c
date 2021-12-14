@@ -33,10 +33,8 @@ bool	init_info(t_info *info)
 	}
 	if (pthread_mutex_init(&info->print, NULL))
 		return (false);
-	pthread_mutex_lock(&info->print);
 	info->is_dead = false;
 	info->fullfill_num = 0;
-	pthread_mutex_unlock(&info->print);
 	return (true);
 }
 

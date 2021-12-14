@@ -18,20 +18,18 @@ bool	start_sims(t_philo *philo)
 	return (true);
 }
 
-
-//need to fix
-void	join_philos(t_philo *philo)
+void	join_philos(t_info *info)
 {
 	int	i;
-	int	num;
+	int	status;
 
 	i = 0;
-	num = philo->info->params[NUM_OF_PHILOS];
-	while (i < num)
+	while (i < info->params[NUM_OF_PHILOS])
 	{
-		//wait
-		pthread_join(philo[i].doctor, NULL);
+		waitpid(info->procs[i], &status, 0); //check
 		i++;
 	}
+	sem_unlink("forks");
+	sem_unlink("print");
 	return ;
 }

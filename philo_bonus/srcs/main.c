@@ -13,6 +13,6 @@ int	main(int argc, char **argv)
 	if (philo == NULL)
 		return (exit_free(&info, philo, "failed to init philo."));
 	start_sims(philo);
-	join_philos(philo);
+	join_philos(&info);
 	return (exit_free(&info, philo, NULL));
 }

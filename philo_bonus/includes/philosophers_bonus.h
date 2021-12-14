@@ -2,8 +2,10 @@
 # define PHILOSOPHERS_H
 
 # include <unistd.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <sys/time.h>
 # include <pthread.h>
 #include <fcntl.h>
@@ -46,14 +48,14 @@ typedef struct s_philo
 	long		times_of_finished_meal;
 }	t_philo;
 
-int			exit_free(t_info *info, t_philo *philos, char *err);
+int			exit_free(t_info *info, t_philo *philo, char *err);
 bool		start_sims(t_philo *philo);
-void		join_philos(t_philo *philo);
+void		join_philos(t_info *info);
 
 bool		init_info(t_info *info);
 t_philo		*init_philo(t_info *info);
 
-void		*philo_routine(t_philo *philo);
+void		philo_routine(t_philo *philo);
 void		shake_forks(t_philo *p);
 void		eat_meal(t_philo *p);
 void		release_forks(t_philo *p);

@@ -1,12 +1,12 @@
 #include "philosophers_bonus.h"
 
-int	exit_free(t_info *info, t_philo *philos, char *err)
+int	exit_free(t_info *info, t_philo *philo, char *err)
 {
 	if (info != NULL)
 	{
-		free(info->forks);
+		free(info->procs);
 	}
-	free(philos);
+	free(philo);
 	if (err != NULL)
 	{
 		printf("%s\n", err);
@@ -17,16 +17,12 @@ int	exit_free(t_info *info, t_philo *philos, char *err)
 
 bool	init_info(t_info *info)
 {
-	int	i;
-	int	ret;
-
 	info->procs = malloc(sizeof(pid_t) * info->params[NUM_OF_PHILOS]);
 	if(info->procs == NULL)
 		return (false);
 	info->forks = sem_open("forks", O_CREAT, O_RDWR,info->params[NUM_OF_PHILOS]);
 	if (info->forks == SEM_FAILED)
 		return (false);
-	i = 0;
 	info->print = sem_open("print", O_CREAT, O_RDWR,info->params[NUM_OF_PHILOS]);
 	if (info->print == SEM_FAILED)
 		return (false);
@@ -37,8 +33,6 @@ bool	init_info(t_info *info)
 
 t_philo	*init_philo(t_info *info)
 {
-	int		i;
-	int		num;
 	t_philo	*philo;
 
 	philo = malloc(sizeof(t_philo));

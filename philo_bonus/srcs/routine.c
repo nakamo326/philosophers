@@ -1,12 +1,13 @@
 #include "philosophers_bonus.h"
 
-void	*philo_routine(t_philo *philo)
+void	philo_routine(t_philo *philo)
 {
 	update_lastmeal_time(get_time(), philo);
+	pthread_create(&philo->doctor, NULL, doctor_routine, philo);
 	if (philo->info->params[NUM_OF_PHILOS] == 1)
 	{
 		output_log(philo, TAKEN_FORK);
-		return (NULL);
+		exit(exit_free(philo->info, philo, NULL));
 	}
 	// if (p->index % 2 == 0)
 	// 	my_usleep(1);
@@ -18,8 +19,8 @@ void	*philo_routine(t_philo *philo)
 		sleep_well(philo);
 		think_about_truth(philo);
 	}
-	// exit_free();
-	return (NULL);
+	pthread_join(philo->doctor, NULL);
+	exit(exit_free(philo->info, philo, NULL));
 }
 
 void	*doctor_routine(void *philo)

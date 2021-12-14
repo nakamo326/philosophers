@@ -21,6 +21,9 @@
 # define SLEEPING " is sleeping"
 # define THINKING " is thinking"
 
+# define SEM_FORM "sem_fork"
+# define SEM_PRINT "sem_print"
+
 typedef enum e_arg_index
 {
 	NUM_OF_PHILOS,
@@ -51,6 +54,7 @@ typedef struct s_philo
 int			exit_free(t_info *info, t_philo *philo, char *err);
 bool		start_sims(t_philo *philo);
 void		join_philos(t_info *info);
+void		unlink_all_sem();
 
 bool		init_info(t_info *info);
 t_philo		*init_philo(t_info *info);

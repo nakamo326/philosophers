@@ -30,7 +30,5 @@ void	join_philos(t_info *info)
 		waitpid(info->procs[i], &status, 0); //check
 		i++;
 	}
-	sem_unlink("forks");
-	sem_unlink("print");
 	return ;
 }

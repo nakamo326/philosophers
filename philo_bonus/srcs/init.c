@@ -20,6 +20,9 @@ bool	init_info(t_info *info)
 	int	i;
 	int	ret;
 
+	info->procs = malloc(sizeof(pid_t) * info->params[NUM_OF_PHILOS]);
+	if(info->procs == NULL)
+		return (false);
 	info->forks = sem_open("forks", O_CREAT, O_RDWR,info->params[NUM_OF_PHILOS]);
 	if (info->forks == SEM_FAILED)
 		return (false);
@@ -32,21 +35,14 @@ bool	init_info(t_info *info)
 	return (true);
 }
 
-t_philo	*init_philos(t_info *info)
+t_philo	*init_philo(t_info *info)
 {
 	int		i;
 	int		num;
-	t_philo	*philos;
+	t_philo	*philo;
 
-	num = info->params[NUM_OF_PHILOS];
-	philos = malloc(sizeof(t_philo) * num);
-	i = 0;
-	while (philos != NULL && i < num)
-	{
-		philos[i].info = info;
-		philos[i].index = i + 1;
-		philos[i].times_of_finished_meal = 0;
-		i++;
-	}
-	return (philos);
+	philo = malloc(sizeof(t_philo));
+	philo->info = info;
+	philo->times_of_finished_meal = 0;
+	return (philo);
 }

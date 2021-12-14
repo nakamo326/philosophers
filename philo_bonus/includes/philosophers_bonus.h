@@ -30,6 +30,7 @@ typedef enum e_arg_index
 typedef struct s_info
 {
 	int		params[5];
+	pid_t	*procs;
 	sem_t	*forks;
 	sem_t	*print;
 	bool	is_dead;
@@ -40,21 +41,19 @@ typedef struct s_philo
 {
 	t_info		*info;
 	int			index;
-	pid_t		proc;
 	pthread_t	doctor;
-	sem_t		*print;
 	long		last_meal_time;
 	long		times_of_finished_meal;
 }	t_philo;
 
 int			exit_free(t_info *info, t_philo *philos, char *err);
-bool		start_sims(t_philo *philos);
-void		join_philos(t_philo *philos);
+bool		start_sims(t_philo *philo);
+void		join_philos(t_philo *philo);
 
 bool		init_info(t_info *info);
-t_philo		*init_philos(t_info *info);
+t_philo		*init_philo(t_info *info);
 
-void		*philo_routine(void *philo);
+void		*philo_routine(t_philo *philo);
 void		shake_forks(t_philo *p);
 void		eat_meal(t_philo *p);
 void		release_forks(t_philo *p);

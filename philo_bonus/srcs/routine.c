@@ -1,26 +1,24 @@
 #include "philosophers_bonus.h"
 
-void	*philo_routine(void *philo)
+void	*philo_routine(t_philo *philo)
 {
-	t_philo	*p;
-
-	p = (t_philo *)philo;
-	update_lastmeal_time(get_time(), p);
-	if (p->info->params[NUM_OF_PHILOS] == 1)
+	update_lastmeal_time(get_time(), philo);
+	if (philo->info->params[NUM_OF_PHILOS] == 1)
 	{
-		output_log(p, TAKEN_FORK);
+		output_log(philo, TAKEN_FORK);
 		return (NULL);
 	}
-	if (p->index % 2 == 0)
-		my_usleep(1);
-	while (!is_dead(p) && !is_fullfilled(p))
+	// if (p->index % 2 == 0)
+	// 	my_usleep(1);
+	while (!is_dead(philo) && !is_fullfilled(philo))
 	{
-		shake_forks(p);
-		eat_meal(p);
-		release_forks(p);
-		sleep_well(p);
-		think_about_truth(p);
+		shake_forks(philo);
+		eat_meal(philo);
+		release_forks(philo);
+		sleep_well(philo);
+		think_about_truth(philo);
 	}
+	// exit_free();
 	return (NULL);
 }
 
@@ -34,7 +32,7 @@ void	*doctor_routine(void *philo)
 	while (!is_dead(p) && !is_fullfilled(p))
 	{
 		usleep(1000);
-		pthread_mutex_lock(&p->info->print);
+		sem_wait(p->info->print);
 		now = get_time();
 		lasttime = read_lastmeal_time(p);
 		if (now - lasttime >= p->info->params[TIME_TO_DIE]
@@ -43,7 +41,7 @@ void	*doctor_routine(void *philo)
 			printf("%ld %d died\n", now, p->index);
 			p->info->is_dead = true;
 		}
-		pthread_mutex_unlock(&p->info->print);
+		sem_post(p->info->print);
 	}
 	return (NULL);
 }

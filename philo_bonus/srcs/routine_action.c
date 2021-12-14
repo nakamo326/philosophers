@@ -2,26 +2,16 @@
 
 void	shake_forks(t_philo *p)
 {
-	if (p->index % 2 == 0)
-	{
-		pthread_mutex_lock(p->right);
-		output_log(p, TAKEN_FORK);
-		pthread_mutex_lock(p->left);
-		output_log(p, TAKEN_FORK);
-	}
-	else
-	{
-		pthread_mutex_lock(p->left);
-		output_log(p, TAKEN_FORK);
-		pthread_mutex_lock(p->right);
-		output_log(p, TAKEN_FORK);
-	}
+	sem_wait(p->info->forks);
+	output_log(p, TAKEN_FORK);
+	sem_wait(p->info->forks);
+	output_log(p, TAKEN_FORK);
 }
 
 void	release_forks(t_philo *p)
 {
-	pthread_mutex_unlock(p->right);
-	pthread_mutex_unlock(p->left);
+	sem_post(p->info->forks);
+	sem_post(p->info->forks);
 }
 
 void	eat_meal(t_philo *p)
@@ -31,9 +21,9 @@ void	eat_meal(t_philo *p)
 	p->times_of_finished_meal++;
 	if (p->times_of_finished_meal == p->info->params[LIMIT_TIMES_TO_DIE])
 	{
-		pthread_mutex_lock(&p->info->print);
+		sem_wait(p->info->print);
 		p->info->fullfill_num++;
-		pthread_mutex_unlock(&p->info->print);
+		sem_post(p->info->print);
 	}
 }
 

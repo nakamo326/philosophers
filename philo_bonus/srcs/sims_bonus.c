@@ -23,7 +23,7 @@ bool	start_sims(t_philo *philo)
 void	join_philos(t_info *info)
 {
 	int	i;
-	int status;
+	int	status;
 
 	i = 0;
 	while (i < info->params[NUM_OF_PHILOS])

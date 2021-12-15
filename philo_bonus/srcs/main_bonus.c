@@ -1,6 +1,7 @@
 #include "philosophers_bonus.h"
 
-void	unlink_all_sem() {
+void	unlink_all_sem(void)
+{
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_PRINT);
 	sem_unlink(SEM_TICKET);

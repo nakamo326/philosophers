@@ -5,8 +5,8 @@ void	*philo_routine(void *philo)
 	t_philo	*p;
 
 	p = (t_philo *)philo;
-	// error manege
-	pthread_create(&p->doctor, NULL, doctor_routine, p);
+	if (pthread_create(&p->doctor, NULL, doctor_routine, p))
+		exit(EXIT_FAILURE);
 	update_lastmeal_time(get_time(), p);
 	if (p->info->params[NUM_OF_PHILOS] == 1)
 	{

@@ -26,7 +26,8 @@ bool	join_philos(t_philo *philos)
 	num = philos->info->params[NUM_OF_PHILOS];
 	while (i < num)
 	{
-		if (pthread_join(philos[i].th, NULL) || pthread_join(philos[i].doctor, NULL))
+		if (pthread_join(philos[i].th, NULL)
+			|| pthread_join(philos[i].doctor, NULL))
 			return (false);
 		i++;
 	}

@@ -34,16 +34,16 @@ void	*doctor_routine(void *philo)
 	while (!is_dead(p) && !is_fullfilled(p))
 	{
 		usleep(1000);
-		pthread_mutex_lock(&p->info->print);
-		now = get_time();
 		lasttime = read_lastmeal_time(p);
+		now = get_time();
+		sem_wait(p->info->print);
 		if (now - lasttime >= p->info->params[TIME_TO_DIE]
 			&& p->info->is_dead == false)
 		{
 			printf("%ld %d died\n", now, p->index);
 			p->info->is_dead = true;
 		}
-		pthread_mutex_unlock(&p->info->print);
+		sem_post(p->info->print);
 	}
 	return (NULL);
 }

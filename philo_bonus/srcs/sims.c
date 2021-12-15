@@ -1,34 +1,34 @@
 #include "philosophers_bonus.h"
 
-bool	start_sims(t_philo *philos)
+bool	start_sims(t_philo *philo)
 {
 	int		i;
-	t_philo	*p;
 
 	i = 0;
-	
-	while (i < philos->info->params[NUM_OF_PHILOS])
+	while (i < philo->info->params[NUM_OF_PHILOS])
 	{
-		p = &(philos[i]);
-		if (pthread_create(&p->th, NULL, philo_routine, p)
-			|| pthread_create(&p->doctor, NULL, doctor_routine, p))
+		philo->index = i + 1;
+		philo->info->pids[i] = fork();
+		if (philo->info->pids[i] == -1)
 			return (false);
+		if (philo->info->pids[i] == 0)
+		{
+			philo_routine(philo);
+		}
 		i++;
 	}
 	return (true);
 }
 
-void	join_philos(t_philo *philos)
+void	join_philos(t_info *info)
 {
 	int	i;
-	int	num;
+	int status;
 
 	i = 0;
-	num = philos->info->params[NUM_OF_PHILOS];
-	while (i < num)
+	while (i < info->params[NUM_OF_PHILOS])
 	{
-		pthread_join(philos[i].th, NULL);
-		pthread_join(philos[i].doctor, NULL);
+		waitpid(0, &status, 0);
 		i++;
 	}
 	return ;

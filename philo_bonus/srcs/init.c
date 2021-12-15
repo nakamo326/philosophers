@@ -1,12 +1,12 @@
 #include "philosophers_bonus.h"
 
-int	exit_free(t_info *info, t_philo *philos, char *err)
+int	exit_free(t_info *info, t_philo *philo, char *err)
 {
 	if (info != NULL)
 	{
-		free(info->forks);
+		free(info->pids);
 	}
-	free(philos);
+	free(philo);
 	if (err != NULL)
 	{
 		printf("%s\n", err);
@@ -17,21 +17,12 @@ int	exit_free(t_info *info, t_philo *philos, char *err)
 
 bool	init_info(t_info *info)
 {
-	int	i;
-	int	ret;
-
-	info->forks = malloc(sizeof(pthread_mutex_t) * info->params[NUM_OF_PHILOS]);
-	if (info->forks == NULL)
+	info->pids = malloc(sizeof(pid_t) * info->params[NUM_OF_PHILOS]);
+	if (info->pids == NULL)
 		return (false);
-	i = 0;
-	while (i < info->params[NUM_OF_PHILOS])
-	{
-		ret = pthread_mutex_init(&info->forks[i], NULL);
-		if (ret != 0)
-			return (false);
-		i++;
-	}
-	if (pthread_mutex_init(&info->print, NULL))
+	info->forks = sem_open(SEM_FORK, O_CREAT | O_EXCL, S_IRWXU, info->params[NUM_OF_PHILOS]);
+	info->print = sem_open(SEM_PRINT, O_CREAT | O_EXCL, S_IRWXU, 1);
+	if (info->forks == SEM_FAILED || info->print == SEM_FAILED)
 		return (false);
 	info->is_dead = false;
 	info->fullfill_num = 0;
@@ -40,22 +31,10 @@ bool	init_info(t_info *info)
 
 t_philo	*init_philos(t_info *info)
 {
-	int		i;
-	int		num;
 	t_philo	*philos;
 
-	num = info->params[NUM_OF_PHILOS];
-	philos = malloc(sizeof(t_philo) * num);
-	i = 0;
-	while (philos != NULL && i < num)
-	{
-		philos[i].info = info;
-		philos[i].index = i + 1;
-		philos[i].left = &info->forks[i];
-		philos[i].right = &info->forks[(i + num - 1) % num];
-		pthread_mutex_init(&philos[i].access_to_last_meal, NULL);
-		philos[i].times_of_finished_meal = 0;
-		i++;
-	}
+	philos = malloc(sizeof(t_philo));
+	philos->info = info;
+	philos->times_of_finished_meal = 0;
 	return (philos);
 }

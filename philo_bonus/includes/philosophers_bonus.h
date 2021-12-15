@@ -6,6 +6,11 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # include <stdbool.h>
 # include <limits.h>
@@ -15,6 +20,9 @@
 # define EATING " is eating"
 # define SLEEPING " is sleeping"
 # define THINKING " is thinking"
+
+# define SEM_FORK "sem_fork"
+# define SEM_PRINT "sem_print"
 
 typedef enum e_arg_index
 {
@@ -26,30 +34,26 @@ typedef enum e_arg_index
 }	t_arg_index;
 typedef struct s_info
 {
-	int				params[5];
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print;
-	bool			is_dead;
-	int				fullfill_num;
+	int		params[5];
+	pid_t	*pids;
+	sem_t	*forks;
+	sem_t	*print;
+	bool	is_dead;
+	int		fullfill_num;
 }	t_info;
 
 typedef struct s_philo
 {
 	t_info			*info;
 	int				index;
-	pthread_t		th;
 	pthread_t		doctor;
-	pthread_mutex_t	*left;
-	pthread_mutex_t	*right;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	access_to_last_meal;
 	long			last_meal_time;
 	long			times_of_finished_meal;
 }	t_philo;
 
-int			exit_free(t_info *info, t_philo *philos, char *err);
-bool		start_sims(t_philo *philos);
-void		join_philos(t_philo *philos);
+int			exit_free(t_info *info, t_philo *philo, char *err);
+bool		start_sims(t_philo *philo);
+void		join_philos(t_info *info);
 
 bool		init_info(t_info *info);
 t_philo		*init_philos(t_info *info);

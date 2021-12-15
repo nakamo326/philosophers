@@ -1,5 +1,5 @@
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -54,23 +54,28 @@ typedef struct s_philo
 	long		times_of_finished_meal;
 }	t_philo;
 
-int			exit_free(t_info *info, t_philo *philo, char *err);
-bool		start_sims(t_philo *philo);
-void		join_philos(t_info *info);
-void		monitor_dead(t_info *info);
-
+// init
 bool		init_info(t_info *info);
 t_philo		*init_philos(t_info *info);
+int			exit_free(t_info *info, t_philo *philo, char *err);
 
+//sims
+bool		start_sims(t_philo *philo);
+void		monitor_dead(t_info *info);
+void		join_philos(t_info *info);
+
+// routine
 void		*philo_routine(void *philo);
+void		*doctor_routine(void *philo);
+
+// actions
 void		shake_forks(t_philo *p);
 void		eat_meal(t_philo *p);
 void		release_forks(t_philo *p);
 void		sleep_well(t_philo *p);
 void		think_about_truth(t_philo *p);
 
-void		*doctor_routine(void *philo);
-
+// utils
 long		get_time(void);
 void		my_usleep(int ms);
 long		output_log(t_philo *p, const char *str);
@@ -83,4 +88,4 @@ size_t		ft_strlen(const char *s);
 bool		ft_isdigits(char *s);
 long long	ft_atoll(const char *nptr);
 
-#endif // PHILOSOPHERS_H
+#endif // PHILOSOPHERS_BONUS_H

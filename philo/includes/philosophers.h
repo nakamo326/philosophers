@@ -47,22 +47,27 @@ typedef struct s_philo
 	long			times_of_finished_meal;
 }	t_philo;
 
+// init
+bool		init_info(t_info *info);
+t_philo		*init_philos(t_info *info);
 int			exit_free(t_info *info, t_philo *philos, char *err);
+
+// sims
 bool		start_sims(t_philo *philos);
 void		join_philos(t_philo *philos);
 
-bool		init_info(t_info *info);
-t_philo		*init_philos(t_info *info);
-
+// routine
 void		*philo_routine(void *philo);
+void		*doctor_routine(void *philo);
+
+// actions
 void		shake_forks(t_philo *p);
 void		eat_meal(t_philo *p);
 void		release_forks(t_philo *p);
 void		sleep_well(t_philo *p);
 void		think_about_truth(t_philo *p);
 
-void		*doctor_routine(void *philo);
-
+// utils
 long		get_time(void);
 void		my_usleep(int ms);
 long		output_log(t_philo *p, const char *str);

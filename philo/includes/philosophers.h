@@ -54,7 +54,7 @@ int			exit_free(t_info *info, t_philo *philos, char *err);
 
 // sims
 bool		start_sims(t_philo *philos);
-void		join_philos(t_philo *philos);
+bool		join_philos(t_philo *philos);
 
 // routine
 void		*philo_routine(void *philo);

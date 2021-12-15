@@ -6,7 +6,6 @@ bool	start_sims(t_philo *philos)
 	t_philo	*p;
 
 	i = 0;
-	
 	while (i < philos->info->params[NUM_OF_PHILOS])
 	{
 		p = &(philos[i]);
@@ -18,7 +17,7 @@ bool	start_sims(t_philo *philos)
 	return (true);
 }
 
-void	join_philos(t_philo *philos)
+bool	join_philos(t_philo *philos)
 {
 	int	i;
 	int	num;
@@ -27,9 +26,9 @@ void	join_philos(t_philo *philos)
 	num = philos->info->params[NUM_OF_PHILOS];
 	while (i < num)
 	{
-		pthread_join(philos[i].th, NULL);
-		pthread_join(philos[i].doctor, NULL);
+		if (pthread_join(philos[i].th, NULL) || pthread_join(philos[i].doctor, NULL))
+			return (false);
 		i++;
 	}
-	return ;
+	return (true);
 }

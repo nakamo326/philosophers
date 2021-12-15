@@ -9,6 +9,7 @@ SRCFILE =	srcs/init.c \
 					srcs/kitchen_timer.c \
 					srcs/log.c \
 					srcs/main.c \
+					srcs/monitor.c \
 					srcs/parse_arg.c \
 					srcs/routine_action.c \
 					srcs/routine_utils.c \

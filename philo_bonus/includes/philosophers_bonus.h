@@ -11,6 +11,7 @@
 # include <semaphore.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 # include <stdbool.h>
 # include <limits.h>
@@ -23,6 +24,8 @@
 
 # define SEM_FORK "sem_fork"
 # define SEM_PRINT "sem_print"
+# define SEM_TICKET "sem_ticket"
+# define SEM_BOMB "sem_bomb"
 
 typedef enum e_arg_index
 {
@@ -35,9 +38,11 @@ typedef enum e_arg_index
 typedef struct s_info
 {
 	int		params[5];
-	pid_t	*pids;
+	pid_t	*procs;
 	sem_t	*forks;
 	sem_t	*print;
+	sem_t	*ticket;
+	sem_t	*bomb;
 	bool	is_dead;
 	int		fullfill_num;
 }	t_info;
@@ -54,6 +59,7 @@ typedef struct s_philo
 int			exit_free(t_info *info, t_philo *philo, char *err);
 bool		start_sims(t_philo *philo);
 void		join_philos(t_info *info);
+void		monitor_dead(t_info *info);
 
 bool		init_info(t_info *info);
 t_philo		*init_philos(t_info *info);

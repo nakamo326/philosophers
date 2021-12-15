@@ -8,10 +8,10 @@ bool	start_sims(t_philo *philo)
 	while (i < philo->info->params[NUM_OF_PHILOS])
 	{
 		philo->index = i + 1;
-		philo->info->pids[i] = fork();
-		if (philo->info->pids[i] == -1)
+		philo->info->procs[i] = fork();
+		if (philo->info->procs[i] == -1)
 			return (false);
-		if (philo->info->pids[i] == 0)
+		if (philo->info->procs[i] == 0)
 		{
 			philo_routine(philo);
 		}

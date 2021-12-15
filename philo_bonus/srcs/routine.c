@@ -15,7 +15,7 @@ void	*philo_routine(void *philo)
 	}
 	if (p->index % 2 == 0)
 		my_usleep(1);
-	while (!is_dead(p) && !is_fullfilled(p))
+	while (true)
 	{
 		shake_forks(p);
 		eat_meal(p);
@@ -33,17 +33,15 @@ void	*doctor_routine(void *philo)
 	long	lasttime;
 
 	p = (t_philo *)philo;
-	while (!is_dead(p) && !is_fullfilled(p))
+	while (true)
 	{
 		usleep(1000);
 		lasttime = read_lastmeal_time(p);
 		now = get_time();
 		sem_wait(p->info->print);
-		if (now - lasttime >= p->info->params[TIME_TO_DIE]
-			&& p->info->is_dead == false)
+		if (now - lasttime >= p->info->params[TIME_TO_DIE])
 		{
 			printf("%ld %d died\n", now, p->index);
-			p->info->is_dead = true;
 			sem_post(p->info->bomb);
 		}
 		sem_post(p->info->print);

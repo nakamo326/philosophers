@@ -27,8 +27,6 @@ bool	init_info(t_info *info)
 	if (info->forks == SEM_FAILED || info->print == SEM_FAILED
 		|| info->ticket == SEM_FAILED || info->bomb == SEM_FAILED)
 		return (false);
-	info->is_dead = false;
-	info->fullfill_num = 0;
 	return (true);
 }
 

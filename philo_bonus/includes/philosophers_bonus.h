@@ -43,17 +43,15 @@ typedef struct s_info
 	sem_t	*print;
 	sem_t	*ticket;
 	sem_t	*bomb;
-	bool	is_dead;
-	int		fullfill_num;
 }	t_info;
 
 typedef struct s_philo
 {
-	t_info			*info;
-	int				index;
-	pthread_t		doctor;
-	long			last_meal_time;
-	long			times_of_finished_meal;
+	t_info		*info;
+	int			index;
+	pthread_t	doctor;
+	long		last_meal_time;
+	long		times_of_finished_meal;
 }	t_philo;
 
 int			exit_free(t_info *info, t_philo *philo, char *err);
@@ -76,8 +74,6 @@ void		*doctor_routine(void *philo);
 long		get_time(void);
 void		my_usleep(int ms);
 long		output_log(t_philo *p, const char *str);
-bool		is_dead(t_philo *p);
-bool		is_fullfilled(t_philo *p);
 void		update_lastmeal_time(long time, t_philo *p);
 long		read_lastmeal_time(t_philo *p);
 

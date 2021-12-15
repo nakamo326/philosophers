@@ -2,7 +2,7 @@
 
 long	output_log(t_philo *p, const char *str)
 {
-	long			time;
+	long	time;
 
 	time = get_time();
 	sem_wait(p->info->print);

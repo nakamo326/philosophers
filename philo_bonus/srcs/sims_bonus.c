@@ -2,7 +2,7 @@
 
 bool	start_sims(t_philo *philo)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < philo->info->params[NUM_OF_PHILOS])

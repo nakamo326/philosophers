@@ -32,7 +32,7 @@ $(NAME): $(OBJS)
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)/$(*D)
-	gcc -MMD -MP $(CFLAGS) $(INCLUDES) -c $< $(LIBS) -o $@
+	gcc -MMD -MP $(CFLAGS) $(INCLUDES) -c $< -o $@
 #	gcc -fsanitize=thread -MMD -MP $(CFLAGS) $(INCLUDES) -c $< $(LIBS) -o $@
 
 clean:

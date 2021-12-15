@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "philosophers_tmp.h"
 
 size_t	ft_strlen(const char *s)
 {

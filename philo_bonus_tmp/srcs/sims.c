@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "philosophers_tmp.h"
 
 bool	start_sims(t_philo *philo)
 {

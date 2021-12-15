@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "philosophers_tmp.h"
 
 void	shake_forks(t_philo *p)
 {

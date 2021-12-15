@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "philosophers_tmp.h"
 
 void	*doctor_routine(void *philo)
 {

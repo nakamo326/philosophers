@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "philosophers_tmp.h"
 
 // need to fix
 bool	is_dead(t_philo *p)

@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "philosophers_tmp.h"
 
 void	unlink_all_sem() {
 	sem_unlink(SEM_FORK);

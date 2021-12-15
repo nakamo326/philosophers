@@ -1,4 +1,4 @@
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 int	exit_free(t_info *info, t_philo *philos, char *err)
 {

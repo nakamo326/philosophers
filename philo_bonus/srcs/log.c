@@ -1,4 +1,4 @@
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 long	output_log(t_philo *p, const char *str)
 {

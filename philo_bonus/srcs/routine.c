@@ -5,6 +5,8 @@ void	*philo_routine(void *philo)
 	t_philo	*p;
 
 	p = (t_philo *)philo;
+	// error manege
+	pthread_create(&p->doctor, NULL, doctor_routine, p);
 	update_lastmeal_time(get_time(), p);
 	if (p->info->params[NUM_OF_PHILOS] == 1)
 	{
@@ -42,6 +44,7 @@ void	*doctor_routine(void *philo)
 		{
 			printf("%ld %d died\n", now, p->index);
 			p->info->is_dead = true;
+			sem_post(p->info->bomb);
 		}
 		sem_post(p->info->print);
 	}

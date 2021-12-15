@@ -22,10 +22,12 @@ void	monitor_dead(t_info *info) {
 	pthread_t monitor;
 
 	if (info->params[LIMIT_TIMES_TO_DIE] != -1) {
+		// error manege
 		pthread_create(&monitor, NULL, count_ticket, info);
 		pthread_join(monitor, NULL);
 	}
 	sem_wait(info->bomb);
+	sem_wait(info->print);
 	i = 0;
 	while(i < info->params[NUM_OF_PHILOS])
 	{

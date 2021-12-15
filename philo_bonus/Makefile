@@ -5,16 +5,16 @@ INCLUDES = -I./includes
 LIBS = -lpthread
 
 # SRCFILE = $(shell find srcs -type f)
-SRCFILE =	srcs/init.c \
-					srcs/kitchen_timer.c \
-					srcs/log.c \
-					srcs/main.c \
-					srcs/monitor.c \
-					srcs/parse_arg.c \
-					srcs/routine_action.c \
-					srcs/routine_utils.c \
-					srcs/routine.c \
-					srcs/sims.c
+SRCFILE =	srcs/init_bonus.c \
+					srcs/kitchen_timer_bonus.c \
+					srcs/log_bonus.c \
+					srcs/main_bonus.c \
+					srcs/monitor_bonus.c \
+					srcs/parse_arg_bonus.c \
+					srcs/routine_action_bonus.c \
+					srcs/routine_bonus.c \
+					srcs/routine_utils_bonus.c \
+					srcs/sims_bonus.c
 
 
 SRCDIRS = $(dir $(SRCFILE))

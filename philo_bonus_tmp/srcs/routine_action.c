@@ -21,9 +21,7 @@ void	eat_meal(t_philo *p)
 	p->times_of_finished_meal++;
 	if (p->times_of_finished_meal == p->info->params[LIMIT_TIMES_TO_DIE])
 	{
-		sem_wait(p->info->print);
 		sem_post(p->info->ticket);
-		sem_post(p->info->print);
 	}
 }
 

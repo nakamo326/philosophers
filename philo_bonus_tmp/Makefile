@@ -5,7 +5,8 @@ INCLUDES = -I./includes
 LIBS = -lpthread
 
 # SRCFILE = $(shell find srcs -type f)
-SRCFILE =	srcs/init.c \
+SRCFILE =	srcs/doctor.c \
+					srcs/init.c \
 					srcs/kitchen_timer_bonus.c \
 					srcs/log.c \
 					srcs/main.c \

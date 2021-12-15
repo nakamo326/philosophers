@@ -61,7 +61,7 @@ int			exit_free(t_info *info, t_philo *philo, char *err);
 
 //sims
 bool		start_sims(t_philo *philo);
-void		monitor_dead(t_info *info);
+bool		monitor_dead(t_info *info);
 void		join_philos(t_info *info);
 
 // routine

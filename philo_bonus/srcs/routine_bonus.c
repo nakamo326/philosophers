@@ -41,8 +41,9 @@ void	*doctor_routine(void *philo)
 		sem_wait(p->info->print);
 		if (now - lasttime >= p->info->params[TIME_TO_DIE])
 		{
-			printf("%ld %d died\n", now, p->index);
 			sem_post(p->info->bomb);
+			printf("%ld %d died\n", now, p->index);
+			exit(EXIT_SUCCESS);
 		}
 		sem_post(p->info->print);
 	}

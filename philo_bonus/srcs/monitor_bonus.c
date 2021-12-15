@@ -12,26 +12,25 @@ void	*count_ticket(void *p) {
 		sem_wait(info->ticket);
 		i++;
 	}
-	sem_wait(info->print);
 	sem_post(info->bomb);
 	return (NULL);
 }
 
-void	monitor_dead(t_info *info) {
-	int i;
-	pthread_t monitor;
+bool	monitor_dead(t_info *info) {
+	int			i;
+	pthread_t	monitor;
 
 	if (info->params[LIMIT_TIMES_TO_DIE] != -1) {
-		// error manege
-		pthread_create(&monitor, NULL, count_ticket, info);
-		pthread_join(monitor, NULL);
+		if (pthread_create(&monitor, NULL, count_ticket, info))
+			return (false);
+		pthread_detach(monitor);
 	}
 	sem_wait(info->bomb);
-	sem_wait(info->print);
 	i = 0;
 	while(i < info->params[NUM_OF_PHILOS])
 	{
 		kill(info->procs[i], SIGKILL);
 		i++;
 	}
+	return (true);
 }

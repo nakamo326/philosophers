@@ -47,5 +47,5 @@ void	think_about_truth(t_philo *p)
 {
 	output_log(p, THINKING);
 	if (p->index % 2 == 1)
-		my_usleep(1);
+		my_usleep(2);
 }

@@ -2,7 +2,7 @@
 
 void	shake_forks(t_philo *p)
 {
-	if (p->index % 2 == 0)
+	if (p->index % 2 == 1)
 	{
 		pthread_mutex_lock(p->right);
 		output_log(p, TAKEN_FORK);
@@ -46,4 +46,6 @@ void	sleep_well(t_philo *p)
 void	think_about_truth(t_philo *p)
 {
 	output_log(p, THINKING);
+	if (p->index % 2 == 1)
+		my_usleep(1);
 }

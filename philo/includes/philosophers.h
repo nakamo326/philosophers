@@ -31,6 +31,7 @@ typedef struct s_info
 	pthread_mutex_t	print;
 	bool			is_dead;
 	int				fullfill_num;
+	bool			is_odd;
 }	t_info;
 
 typedef struct s_philo

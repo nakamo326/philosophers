@@ -35,6 +35,10 @@ bool	init_info(t_info *info)
 		return (false);
 	info->is_dead = false;
 	info->fullfill_num = 0;
+	if (info->params[NUM_OF_PHILOS] % 2 == 1)
+		info->is_odd = true;
+	else
+		info->is_odd = false;
 	return (true);
 }
 

@@ -16,7 +16,7 @@ bool	ft_isdigits(char *s)
 		return (false);
 	while (*s)
 	{
-		if (*s <= 48 && *s >= 57)
+		if (*s < 48 || *s > 57)
 			return (false);
 		s++;
 	}

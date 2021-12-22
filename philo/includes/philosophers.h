@@ -24,6 +24,7 @@ typedef enum e_arg_index
 	TIME_TO_SLEEP,
 	LIMIT_TIMES_TO_DIE,
 }	t_arg_index;
+
 typedef struct s_info
 {
 	int				params[5];

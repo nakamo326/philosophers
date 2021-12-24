@@ -3,7 +3,7 @@ The Dining Philosophers Problem implementation of C.
 
 ## Overview
 
-One of the assignment of 42Tokyo.
+One of the assignment of 42Tokyo.\
 This is C implementation of the dining philosophers problem.
 
 ## Usage
@@ -17,7 +17,7 @@ The simulation ends when all philosophers have finished the number of meals spec
 
 ## Features
 
-[/philo](./philo) uses pthread and mutex.
+[/philo](./philo) uses pthread and mutex.\
 [/philo_bonus](./philo_bonus) uses process and semaphore.
 
 ## Reference

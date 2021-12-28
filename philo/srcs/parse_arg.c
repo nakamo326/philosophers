@@ -23,9 +23,9 @@ bool	ft_isdigits(char *s)
 	return (true);
 }
 
-long long	ft_atoll(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-	long long	num;
+	int	num;
 
 	num = 0;
 	while (*nptr >= '0' && *nptr <= '9')
@@ -38,21 +38,18 @@ long long	ft_atoll(const char *nptr)
 
 bool	parse_arg(t_info *info, int argc, char **argv)
 {
-	int			i;
-	long long	tmp;
+	int	tmp;
 
 	if (!(argc == 5 || argc == 6))
 		return (false);
-	i = 1;
-	while (i < argc)
+	for (int i = 1; i < argc; i++)
 	{
 		if (ft_strlen(argv[i]) > 10 || !ft_isdigits(argv[i]))
 			return (false);
-		tmp = ft_atoll(argv[i]);
+		tmp = ft_atoi(argv[i]);
 		if (tmp <= 0 || tmp > INT_MAX)
 			return (false);
 		info->params[i - 1] = tmp;
-		i++;
 	}
 	if (argc == 5)
 		info->params[LIMIT_TIMES_TO_DIE] = -1;

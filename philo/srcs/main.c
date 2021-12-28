@@ -2,7 +2,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_info	info;
+	t_info	info = {0};
 	t_philo	*philos;
 
 	if (!parse_arg(&info, argc, argv))

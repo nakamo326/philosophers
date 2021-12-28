@@ -50,38 +50,38 @@ typedef struct s_philo
 }	t_philo;
 
 // init
-bool		init_info(t_info *info);
-t_philo		*init_philos(t_info *info);
-int			exit_free(t_info *info, t_philo *philos, char *err);
+bool	init_info(t_info *info);
+t_philo	*init_philos(t_info *info);
+int		exit_free(t_info *info, t_philo *philos, char *err);
 
 // sims
-bool		start_sims(t_philo *philos);
-bool		join_philos(t_philo *philos);
+bool	start_sims(t_philo *philos);
+bool	join_philos(t_philo *philos);
 
 // routine
-void		*philo_routine(void *philo);
-void		*doctor_routine(void *philo);
+void	*philo_routine(void *philo);
+void	*doctor_routine(void *philo);
 
 // actions
-void		shake_forks(t_philo *p);
-void		eat_meal(t_philo *p);
-void		release_forks(t_philo *p);
-void		sleep_well(t_philo *p);
-void		think_about_truth(t_philo *p);
+void	shake_forks(t_philo *p);
+void	eat_meal(t_philo *p);
+void	release_forks(t_philo *p);
+void	sleep_well(t_philo *p);
+void	think_about_truth(t_philo *p);
 
 // utils
-long		get_time(void);
-void		my_usleep(int ms);
-long		output_log(t_philo *p, const char *str);
-bool		is_dead(t_philo *p);
-bool		is_fullfilled(t_philo *p);
-void		update_lastmeal_time(long time, t_philo *p);
-long		read_lastmeal_time(t_philo *p);
+long	get_time(void);
+void	my_usleep(int ms);
+long	output_log(t_philo *p, const char *str);
+bool	is_dead(t_philo *p);
+bool	is_fullfilled(t_philo *p);
+void	update_lastmeal_time(long time, t_philo *p);
+long	read_lastmeal_time(t_philo *p);
 
 // parse
-bool		parse_arg(t_info *info, int argc, char **argv);
-size_t		ft_strlen(const char *s);
-bool		ft_isdigits(char *s);
-long long	ft_atoll(const char *nptr);
+bool	parse_arg(t_info *info, int argc, char **argv);
+size_t	ft_strlen(const char *s);
+bool	ft_isdigits(char *s);
+int		ft_atoi(const char *nptr);
 
 #endif // PHILOSOPHERS_H
